@@ -76,13 +76,13 @@ const Blog = () => {
             ) : (
               <Container>
                 <div className="blogPage blogPageAdmin">
-                  <h1>Admin Blog Page</h1>
+                  <h3>Admin Blog Page</h3>
                   <h1>{blogPage?.title}</h1>
                   <div className="blogpage-img">
-                    <img
+                    {/* <img
                       src={blogPage?.large_thumb[0]?.url}
                       alt="blogpic"
-                    />
+                    /> */}
                   </div>
                   <p>
                     Last Update On: <b>{printDate(blogPage?.updatedAt)}</b> by{' '}

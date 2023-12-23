@@ -81,19 +81,22 @@ const BlogEdit = () => {
 
   };
 
+  
+
   return (
     <>
       <Header />
       {loading ? (
         <Container>
           <div>
-            <h1>Admin Blog Edit Panel</h1>
+            
             {pagefound === 'Notfound' ? (
               <Error />
             ) : (
-              <Form>
-                <FormInputs blogData={blogEdit} setBlogData={setBlogEdit} _id={idURL} />
-                <Button
+              <>
+            <div className='col-md-12 sticky-top'>
+            <h4>Admin Blog Edit Panel</h4>
+            <Button
                   variant="outline-primary"
                   className="update_button"
                   type="submit"
@@ -102,7 +105,12 @@ const BlogEdit = () => {
                 >
                   Update
                 </Button>
+            </div>
+              <Form>
+                <FormInputs blogData={blogEdit} setBlogData={setBlogEdit} _id={idURL} />
+                
               </Form>
+              </>
             )}
           </div>
         </Container>

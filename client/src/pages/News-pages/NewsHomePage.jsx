@@ -3,7 +3,7 @@ import { SideBar } from '../../component/AdminBlogs/SideBar'
 import Footer from '../../component/AdminBlogs/Constants/footer'
 import { NewsListPage } from '../../component/AdminBlogs/News/NewsListPage'
 
-export const NewsHomePage = () => {
+const NewsHomePage = () => {
     return (
         <>
             <div className='admin-home-parent'>
@@ -16,3 +16,5 @@ export const NewsHomePage = () => {
         </>
     )
 }
+
+export default NewsHomePage;

@@ -68,7 +68,7 @@ export const FormInputsTeam = ({ team, setTeam, endpoint }) => {
                         />
                         <button
                             variant="outline-primary"
-                            className="update_button"
+                            className="update_button btn btn-sm btn-primary"
 
                             onClick={(e) => handleAddCategory(e, categoryDropDown, setCategoryDropDown, category, endpoint, 'teamCategory')}
                         >ADD</button>

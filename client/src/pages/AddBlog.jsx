@@ -1,9 +1,10 @@
 import React from 'react'
-import { SideBar } from '../component/AdminBlogs/SideBar'
+// import { SideBar } from '../component/AdminBlogs/SideBar'
 import Footer from '../component/AdminBlogs/Constants/footer'
 import Compose from '../component/AdminBlogs/compose'
+import { SideBar } from '../component/AdminBlogs/SideBar'
 
-export const AddBlog = () => {
+const AddBlog = () => {
     return (
         <>
             <div className='admin-home-parent'>
@@ -16,3 +17,5 @@ export const AddBlog = () => {
         </>
     )
 }
+
+export default AddBlog;

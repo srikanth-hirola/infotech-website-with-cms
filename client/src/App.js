@@ -3,120 +3,122 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import ScrollToTop from './component/scrollToTop/ScrollToTop';
 import { HelmetProvider } from 'react-helmet-async';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './css/style.css'
+import 'react-toastify/dist/ReactToastify.css';
+import './assets/scss/app.scss';
+
+import { ToastContainer } from 'react-toastify';
 // Home Pages Import
-import DigitalAgency from './pages/DigitalAgency';
-import CreativeAgency from './pages/CreativeAgency';
-import PersonalPortfolio from './pages/PersonalPortfolio';
-import HomeStartup from './pages/HomeStartup';
-import CorporateAgency from './pages/CorporateAgency';
+const DigitalAgency = lazy(() => import('./pages/DigitalAgency'));
+const CreativeAgency = lazy(() => import('./pages/CreativeAgency'));
+const PersonalPortfolio = lazy(() => import('./pages/PersonalPortfolio'));
+const HomeStartup = lazy(() => import('./pages/HomeStartup'));
+const CorporateAgency = lazy(() => import('./pages/CorporateAgency'));
 
 // Blog Import
-import BlogGridView from './pages/BlogGrid';
-import BlogCategory from './pages/Category';
-import BlogArchive from './pages/Archive';
-import BlogDetails from './pages/BlogDetails';
+const BlogGridView = lazy(() => import('./pages/BlogGrid'));
+const BlogCategory = lazy(() => import('./pages/Category'));
+const BlogArchive = lazy(() => import('./pages/Archive'));
+const BlogDetails = lazy(() => import('./pages/BlogDetails'));
 
 // Service
-import ServiceOne from './pages/ServiceOne';
-import ServiceTwo from './pages/ServiceTwo';
-import ServiceDetails from './pages/ServiceDetails';
+const ServiceOne = lazy(() => import('./pages/ServiceOne'));
+const ServiceTwo = lazy(() => import('./pages/ServiceTwo'));
+const ServiceDetails = lazy(() => import('./pages/ServiceDetails'));
 
 // Project
-import ProjectGridOne from './pages/ProjectGridOne';
-import ProjectGridTwo from './pages/ProjectGridTwo';
-import ProjectGridThree from './pages/ProjectGridThree';
-import ProjectGridFive from './pages/ProjectGridFive';
-import ProjectGridFour from './pages/ProjectGridFour';
-import ProjectDetails from './pages/ProjectDetails';
+const ProjectGridOne = lazy(() => import('./pages/ProjectGridOne'));
+const ProjectGridTwo = lazy(() => import('./pages/ProjectGridTwo'));
+const ProjectGridThree = lazy(() => import('./pages/ProjectGridThree'));
+const ProjectGridFive = lazy(() => import('./pages/ProjectGridFive'));
+const ProjectGridFour = lazy(() => import('./pages/ProjectGridFour'));
+const ProjectDetails = lazy(() => import('./pages/ProjectDetails'));
 
 // Pages
-import AboutUs from './pages/AboutUs';
-import OurOffice from './pages/OurOffice';
-import OurClients from './pages/OurClients';
-import Team from './pages/Team';
-import TeamDetails from './pages/TeamDetails';
-import CaseStudy from './pages/CaseStudy';
-import CaseDetails from './pages/CaseStudyDetails';
-import Testimonials from './pages/Testimonials';
-import PricingTable from './pages/PricingTable';
-import Typography from './pages/Typography';
-import Contact from './pages/Contact';
-import ErrorPage from './pages/404';
-import ComingSoon from './pages/ComingSoon';
-import PrivacyPolicy from './pages/PrivacyPolicy';
-import TermsOfUse from './pages/TermsOfUse';
+const AboutUs = lazy(() => import('./pages/AboutUs'));
+const OurOffice = lazy(() => import('./pages/OurOffice'));
+const OurClients = lazy(() => import('./pages/OurClients'));
+const Team = lazy(() => import('./pages/Team'));
+const TeamDetails = lazy(() => import('./pages/TeamDetails'));
+const CaseStudy = lazy(() => import('./pages/CaseStudy'));
+const CaseDetails = lazy(() => import('./pages/CaseStudyDetails'));
+const Testimonials = lazy(() => import('./pages/Testimonials'));
+const PricingTable = lazy(() => import('./pages/PricingTable'));
+const Typography = lazy(() => import('./pages/Typography'));
+const Contact = lazy(() => import('./pages/Contact'));
+const ErrorPage = lazy(() => import('./pages/404'));
+const ComingSoon = lazy(() => import('./pages/ComingSoon'));
+const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
+const TermsOfUse = lazy(() => import('./pages/TermsOfUse'));
 
 // Css Import
-import './assets/scss/app.scss';
+
 // import PageOne from './pages/servicePages/PageOne';
-import CitiesWeAre from './pages/CitiesWeAre';
-import CitiesWeAreDetails from './pages/CitiesWeAreDetails';
-import AboutTab from './component/tabs/AboutTab';
+const CitiesWeAre = lazy(() => import('./pages/CitiesWeAre'));
+const CitiesWeAreDetails = lazy(() => import('./pages/CitiesWeAreDetails'));
+const AboutTab = lazy(() => import('./component/tabs/AboutTab'));
 
 //Admin
-import './component/admin/admin';
+// import './component/admin/admin';
 // import AdminHome from './component/admin/admin';
-import OurProducts from './pages/OurProducts';
-import Industries from './pages/Industries';
-import IndustriesDetails from './pages/IndustriesDetails';
-import HrAndPayroll from './pages/productPages/HrAndPayroll';
-import JewellerySoftware from './pages/productPages/JewellerySoftware';
-import InventorySoftware from './pages/productPages/InventorySoftware';
-import SchoolSoftware from './pages/productPages/SchoolSoftware';
-import Clients from './pages/Clients';
-import SeoCompanies from './pages/companies/SeoCompanies';
-import SeoCompaniesDetails from './pages/companies/SeoCompaniesDetails';
-import Delhi from './pages/cities/Delhi';
-import Bangalore from './pages/cities/Bangalore';
-import Pune from './pages/cities/Pune';
-import Kolkata from './pages/cities/Kolkata';
-import Chennai from './pages/cities/Chennai';
-import Mumbai from './pages/cities/Mumbai';
-import Hyderabad from './pages/cities/Hyderabad';
-import SeoCompanyInBangalore from './pages/companies/SeoCompanyInDelhi';
-import SeoCompanyInDelhi from './pages/companies/SeoCompanyInDelhi';
-import SeoCompanyInChennai from './pages/companies/SeoCompanyInChennai';
-import SeoCompanyInHyderabad from './pages/companies/SeoCompanyInHyderabad';
-import SeoCompanyInKolkata from './pages/companies/SeoCompanyInKolkata';
-import SeoCompanyInMumbai from './pages/companies/SeoCompanyInMumbai';
-import SeoCompanyInPune from './pages/companies/SeoCompanyInPune';
-import News from './pages/News';
-import Whatsapp from './common/Whatsapp';
-import SalesIQ from './common/ZohoSales';
+const OurProducts = lazy(() => import('./pages/OurProducts'));
+const Industries  = lazy(() => import( './pages/Industries'));
+const IndustriesDetails  = lazy(() => import( './pages/IndustriesDetails'));
+const HrAndPayroll  = lazy(() => import( './pages/productPages/HrAndPayroll'));
+const JewellerySoftware  = lazy(() => import( './pages/productPages/JewellerySoftware'));
+const InventorySoftware  = lazy(() => import( './pages/productPages/InventorySoftware'));
+const SchoolSoftware  = lazy(() => import( './pages/productPages/SchoolSoftware'));
+const Clients  = lazy(() => import( './pages/Clients'));
+const SeoCompanies  = lazy(() => import( './pages/companies/SeoCompanies'));
+const SeoCompaniesDetails  = lazy(() => import( './pages/companies/SeoCompaniesDetails'));
+const Delhi  = lazy(() => import( './pages/cities/Delhi'));
+const Bangalore  = lazy(() => import( './pages/cities/Bangalore'));
+const Pune  = lazy(() => import( './pages/cities/Pune'));
+const Kolkata  = lazy(() => import( './pages/cities/Kolkata'));
+const Chennai  = lazy(() => import( './pages/cities/Chennai'));
+const Mumbai  = lazy(() => import( './pages/cities/Mumbai'));
+const Hyderabad  = lazy(() => import( './pages/cities/Hyderabad'));
+const SeoCompanyInBangalore  = lazy(() => import( './pages/companies/SeoCompanyInDelhi'));
+const SeoCompanyInDelhi  = lazy(() => import( './pages/companies/SeoCompanyInDelhi'));
+const SeoCompanyInChennai  = lazy(() => import( './pages/companies/SeoCompanyInChennai'));
+const SeoCompanyInHyderabad  = lazy(() => import( './pages/companies/SeoCompanyInHyderabad'));
+const SeoCompanyInKolkata  = lazy(() => import( './pages/companies/SeoCompanyInKolkata'));
+const SeoCompanyInMumbai  = lazy(() => import( './pages/companies/SeoCompanyInMumbai'));
+const SeoCompanyInPune  = lazy(() => import( './pages/companies/SeoCompanyInPune'));
+const News  = lazy(() => import( './pages/News'));
+const Whatsapp  = lazy(() => import( './common/Whatsapp'));
+const SalesIQ  = lazy(() => import( './common/ZohoSales'));
 
-import BasicMasonry from './elements/ClientScroll';
-import Banner from './elements/BannerSlider';
-import Aviaton from './pages/aviation/Aviaton';
-import PressRelease from './pages/pressRelease/PressRelease';
+const BasicMasonry  = lazy(() => import( './elements/ClientScroll'));
+const Banner  = lazy(() => import( './elements/BannerSlider'));
+const Aviaton  = lazy(() => import( './pages/aviation/Aviaton'));
+const PressRelease  = lazy(() => import( './pages/pressRelease/PressRelease'));
 
-import EcommerecLandingPage from './pages/langing-pages/e-commerce/EcommerecLandingPage';
-import TeamOverseas from './component/team/TeamOverseas';
-import OverseasTeam from './pages/OverseasTeam';
-import PageNotFound from './pages/PageNotFound';
-import Error from './component/AdminBlogs/Constants/error';
-import { AdminHome } from './pages/AdminHome';
+const EcommerecLandingPage  = lazy(() => import( './pages/langing-pages/e-commerce/EcommerecLandingPage'));
+const TeamOverseas  = lazy(() => import( './component/team/TeamOverseas'));
+const OverseasTeam  = lazy(() => import( './pages/OverseasTeam'));
+const PageNotFound  = lazy(() => import( './pages/PageNotFound'));
+const Error  = lazy(() => import( './component/AdminBlogs/Constants/error'));
+const AdminHome = lazy(() => import( './pages/AdminHome'));
 
 // blogsroutes starts here
 
-import { NewsAdd } from './pages/News-pages/NewsAdd'
-import { TeamAdd } from './pages/Teams/TeamAdd'
-import { TeamEdit } from './pages/Teams/TeamEdit'
-import { TeamsHomePage } from './pages/Teams/TeamsHomePage'
-import { NewsEdit } from './pages/News-pages/NewsEdit'
-import { NewsHomePage } from './pages/News-pages/NewsHomePage'
-import { FormPage } from './pages/Form/FormPage'
-import { Login } from './component/AdminBlogs/Login'
-import { AddBlog } from './pages/AddBlog'
-import { EditBlog } from './pages/EditBlog'
-import { AdminPortfolioAdd } from './pages/Portfolio/AdminPortfolioAdd'
-import { AdminPortfolio } from './pages/Portfolio/AdminPortfolio'
-import { AdminPortfolioEdit } from './pages/Portfolio/AdminPortfolioEdit'
-import ProtectedAdminRoute from './Routes/ProtectedAdminRoute';
-import Loading from './pages/loading';
-import './css/style.css'
-import 'react-toastify/dist/ReactToastify.css';
+const NewsAdd  = lazy(() => import( './pages/News-pages/NewsAdd'))
+const TeamAdd  = lazy(() => import( './pages/Teams/TeamAdd'))
+const TeamEdit = lazy(() => import( './pages/Teams/TeamEdit'))
+const TeamsHomePage = lazy(() => import( './pages/Teams/TeamsHomePage'))
+const NewsEdit = lazy(() => import( './pages/News-pages/NewsEdit'))
+const NewsHomePage = lazy(() => import( './pages/News-pages/NewsHomePage'))
+const FormPage = lazy(() => import( './pages/Form/FormPage'))
+const AddBlog = lazy(() => import( './pages/AddBlog'))
+const EditBlog = lazy(() => import( './pages/EditBlog'))
+const AdminPortfolioAdd = lazy(() => import( './pages/Portfolio/AdminPortfolioAdd'))
+const AdminPortfolio = lazy(() => import( './pages/Portfolio/AdminPortfolio'))
+const AdminPortfolioEdit = lazy(() => import( './pages/Portfolio/AdminPortfolioEdit'))
+const ProtectedAdminRoute  = lazy(() => import( './Routes/ProtectedAdminRoute'));
+const Login = lazy(() => import('./component/AdminBlogs/Login'));
+// const Loading  = lazy(() => import( './pages/loading'));
 
-import { ToastContainer } from 'react-toastify';
 
 
 // Admin Panel Components
@@ -133,9 +135,11 @@ const App = () => {
   return (
     <HelmetProvider context={helmetContext}>
 
+          <Suspense fallback={<div>Loading...</div>}>
       <Router  >
 
         <ScrollToTop>
+
           <ToastContainer />
           <Routes>
 
@@ -148,154 +152,154 @@ const App = () => {
               path="/admin"
               exact
               element={
-                <React.Suspense fallback=<Loading />>
+                
                   <ProtectedAdminRoute>
                     <AdminHome />
                   </ProtectedAdminRoute>
-                </React.Suspense>
+                
               }
             />
             <Route
               path="/admin/portfolio"
               exact
               element={
-                <React.Suspense fallback=<Loading />>
+                
                   <ProtectedAdminRoute>
                     <AdminPortfolio />
                   </ProtectedAdminRoute>
-                </React.Suspense>
+                
               }
             />
             <Route
               path="/admin/team"
               exact
               element={
-                <React.Suspense fallback=<Loading />>
+                
                   <ProtectedAdminRoute>
                     <TeamsHomePage />
                   </ProtectedAdminRoute>
-                </React.Suspense>
+                
               }
             />
             <Route
               path="/admin/news"
               exact
               element={
-                <React.Suspense fallback=<Loading />>
+                
                   <ProtectedAdminRoute>
                     <NewsHomePage />
                   </ProtectedAdminRoute>
-                </React.Suspense>
+                
               }
             />
             <Route
               path="/admin/form"
               exact
               element={
-                <React.Suspense fallback=<Loading />>
+                
                   <ProtectedAdminRoute>
                     <FormPage />
                   </ProtectedAdminRoute>
-                </React.Suspense>
+                
               }
             />
             <Route
               path="/admin/:publish"
               exact
               element={
-                <React.Suspense fallback=<Loading />>
+                
                   <ProtectedAdminRoute>
                     <Blog />
                   </ProtectedAdminRoute>
-                </React.Suspense>
+                
               }
             />
             <Route
               path="/admin/portfolio/edit/:id"
               exact
               element={
-                <React.Suspense fallback=<Loading />>
+                
                   <ProtectedAdminRoute>
                     <AdminPortfolioEdit />
                   </ProtectedAdminRoute>
-                </React.Suspense>
+                
               }
             />
             <Route
               path="/admin/team/edit/:id"
               exact
               element={
-                <React.Suspense fallback=<Loading />>
+                
                   <ProtectedAdminRoute>
                     <TeamEdit />
                   </ProtectedAdminRoute>
-                </React.Suspense>
+                
               }
             />
             <Route
               path="/admin/news/edit/:id"
               exact
               element={
-                <React.Suspense fallback=<Loading />>
+                
                   <ProtectedAdminRoute>
                     <NewsEdit />
                   </ProtectedAdminRoute>
-                </React.Suspense>
+                
               }
             />
             <Route
               path="/admin/blog/edit/:id"
               exact
               element={
-                <React.Suspense fallback=<Loading />>
+                
                   <ProtectedAdminRoute>
                     <EditBlog />
                   </ProtectedAdminRoute>
-                </React.Suspense>
+                
               }
             />
             <Route
               path="/admin/compose"
               exact
               element={
-                <React.Suspense fallback=<Loading />>
+                
                   <ProtectedAdminRoute>
                     <AddBlog />
                   </ProtectedAdminRoute>
-                </React.Suspense>
+                
               }
             />
             <Route
               path="/admin/portfolio/add"
               exact
               element={
-                <React.Suspense fallback=<Loading />>
+                
                   <ProtectedAdminRoute>
                     <AdminPortfolioAdd />
                   </ProtectedAdminRoute>
-                </React.Suspense>
+                
               }
             />
             <Route
               path="/admin/team/add"
               exact
               element={
-                <React.Suspense fallback=<Loading />>
+                
                   <ProtectedAdminRoute>
                     <TeamAdd />
                   </ProtectedAdminRoute>
-                </React.Suspense>
+                
               }
             />
             <Route
               path="/admin/news/add"
               exact
               element={
-                <React.Suspense fallback=<Loading />>
+                
                   <ProtectedAdminRoute>
                     <NewsAdd />
                   </ProtectedAdminRoute>
-                </React.Suspense>
+                
               }
             />
 
@@ -335,9 +339,8 @@ const App = () => {
             <Route
               path={process.env.PUBLIC_URL + '/blog/'}
               element={
-                <Suspense fallback={<div>Loading...</div>}>
+                
                   <LazyBlogContent />
-                </Suspense>
               }
             />
 
@@ -375,10 +378,10 @@ const App = () => {
               path={process.env.PUBLIC_URL + '/products/'}
               element={<OurProducts />}
             />
-            {<Route
+            <Route
               path={process.env.PUBLIC_URL + '/:slug/'}
               element={<ServiceDetails />}
-            />}
+            />
 
             {/* <Route
              <Route
@@ -613,6 +616,7 @@ const App = () => {
         <Whatsapp />
         {/* <SalesIQ/> */}
       </Router>
+          </Suspense>
     </HelmetProvider>
   );
 };

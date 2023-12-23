@@ -1,11 +1,9 @@
-import React, { useState } from 'react';
-
-import data from '../data/project/ProjectData.json'
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { slugify } from '../utils';
 import SectionTitle from '../elements/section-title/SectionTitle';
 import Tilty from 'react-tilty';
-const jsonData = data;
+import { useApiCalls } from '../Hooks/useApiCalls';
 
 const filters = [
   {
@@ -43,6 +41,14 @@ const FilteredDataComponent = ({projectStyle, portfolio,columnGap,itemShow}) => 
   // const handleCategoryChange = (category) => {
   //   setSelectedCategory(category);
   // };
+
+  const [loading, setLoading] = useState(false);
+  const [portfolios, setportfolio] = useState([]);
+  console.log("portfolio", portfolios)
+  const [pagefound, setPageFound] = useState('');
+
+  const { fetchBunchData } = useApiCalls();
+
   const [selectedCategory, setSelectedCategory] = useState('All Works');
   const [activeCategory, setActiveCategory] = useState('All Works');
 
@@ -54,9 +60,9 @@ const handleCategoryChange = (category) => {
 
   const filterData = () => {
     if (selectedCategory === '' || selectedCategory === 'All Works'){
-      return jsonData.slice(0,9);  
+      return portfolios.slice(0,9);  
     }
-    return jsonData.filter(obj =>
+    return portfolios.filter(obj =>
       obj.category.some(category => category.toLowerCase().includes(selectedCategory.toLowerCase()))
     );
   };
@@ -73,6 +79,13 @@ const handleCategoryChange = (category) => {
     }
     return chunkedArr;
   }
+
+  useEffect(() => {
+    let endpoint = 'admin/portfolio'
+    fetchBunchData(endpoint, setLoading, setportfolio, setPageFound);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+}, []);
+
 
   return (
     <div>
@@ -108,7 +121,7 @@ const handleCategoryChange = (category) => {
                 <div className='project-grid active '>
 				<div className="thumbnail">
 				<Link to={process.env.PUBLIC_URL + `/portfolio/${slugify(portfolio.title)}`}>
-					<img src={process.env.PUBLIC_URL + portfolio.thumb[0].url} loading="lazy" alt="icon" />
+					<img src={process.env.PUBLIC_URL + portfolio.thumb.url} loading="lazy" alt="icon" />
 				</Link>
 				</div>
 				<div className="content">

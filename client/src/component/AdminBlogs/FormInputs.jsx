@@ -248,7 +248,7 @@ export const FormInputs = ({ blogData, setBlogData, _id }) => {
                         />
                         <button
                             variant="outline-primary"
-                            className="update_button"
+                            className="update_button btn btn-sm btn-primary"
                             onClick={handleAddCategory}
                         >ADD</button>
                     </div>

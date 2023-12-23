@@ -3,6 +3,7 @@ import emailjs from '@emailjs/browser';
 import Alert from 'react-bootstrap/Alert';
 import axios from 'axios';
 import Form from 'react-bootstrap/Form';
+import { backend_url } from '../../backend_url';
 
 const Result = () => {
   return (
@@ -25,13 +26,15 @@ const FormThree = () => {
   const [msg, setMessage] = useState('');
   const [nameError, setError] = useState(false);
 
+  const API = backend_url;
+
   const submit = async (e) => {
     e.preventDefault();
 
     const nameVer = NameVali(name, email, phone, company, service);
     if (nameVer) {
       await axios
-        .post('https://admin.onlinemarketingcompany.online/api/form', {
+        .post(`${API}/admin/form`, {
           name,
           email,
           phone,

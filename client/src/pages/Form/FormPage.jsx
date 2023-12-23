@@ -3,7 +3,7 @@ import { SideBar } from '../../component/AdminBlogs/SideBar'
 import Footer from '../../component/AdminBlogs/Constants/footer'
 import { FormData } from '../../component/AdminBlogs/Form/FormData'
 
-export const FormPage = () => {
+const FormPage = () => {
     return (
         <>
             <div className='admin-home-parent'>
@@ -16,3 +16,5 @@ export const FormPage = () => {
         </>
     )
 }
+
+export default FormPage;

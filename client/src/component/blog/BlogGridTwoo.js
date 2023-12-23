@@ -3,6 +3,30 @@ import { Link } from "react-router-dom";
 import { slugify } from "../../utils";
 
 const BlogGridTwoo = ({ data, colSize }) => {
+
+  function formatDate(inputDate) {
+    console.log(inputDate)
+    const dateObject = new Date(inputDate);
+
+    
+    // Get date, month name, and year
+    const day = dateObject.getDate();
+    const monthName1 = dateObject.getMonth()
+    const year = dateObject.getFullYear();
+
+   
+    
+    const month = dateObject.toLocaleString('default', { month: 'short' });
+    console.log(month)
+    
+    // Get the month name based on the month index
+    const monthName = month;
+    
+// console.log(`${day} ${month} ${year}`)
+    // Return the formatted result
+    return `${day} ${monthName} ${year}`
+  }
+  
   return (
     <>
       {data.map((blog) => (
@@ -14,7 +38,7 @@ const BlogGridTwoo = ({ data, colSize }) => {
               >
                 <img
                 //   src={`${process.env.PUBLIC_URL}/${blog.thumb.url}`}
-                src={`${Array.isArray(blog.thumb) ? blog.thumb[0].url : blog.thumb.url}`}
+                src={`${Array.isArray(blog.thumb) ? blog.large_thumb[0].url : blog.large_thumb[0].url}`}
                   loading="lazy"
                   alt="Blog"
                 />
@@ -23,9 +47,9 @@ const BlogGridTwoo = ({ data, colSize }) => {
             </div>
             <div className="author">
               <div className="info">
-                <h6 className="author-name">{blog.author_name}</h6>
+                <h6 className="author-name">{blog?.author.author_name}</h6>
                 <ul className="blog-meta list-unstyled">
-                  <li>{blog.post_date}</li>
+                  <li>{blog?.createdAt ? formatDate(blog?.createdAt) : blog?.post_date}</li>
                   <li>{blog.read_time}</li>
                 </ul>
               </div>

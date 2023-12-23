@@ -1,25 +1,50 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import FooterOne from '../common/footer/FooterOne';
 import HeaderOne from '../common/header/HeaderOne';
 import SEO from '../common/SEO';
 import BlogGridTwoo from '../component/blog/BlogGridTwoo';
-import BlogData from "../data/blog/BlogData.json";
 import BreadCrumbOne from '../elements/breadcrumb/BreadCrumbOne';
 
 import {slugify} from '../utils';
 import FooterCta from '../component/cta/FooterCta';
+import axios from 'axios';
 // import Reveal from 'react-reveal/Reveal';
 
 
-const allBlogData = BlogData;
 
 const BlogCategory = () => {
 
     const params = useParams();
     const blogSlug = params.slug;
 
-    const getBlogData = allBlogData.filter(blog => slugify(blog.category) === blogSlug);
+    const [blog, setBlog] = useState([]);
+  const [filteredBlog, setFilteredBlog] = useState([]);
+  const [pagefound, setPageFound] = useState("");
+  const [loading, setLoading] = useState(false);
+
+    const fetchBlog = async (url) => {
+        try {
+          const result = await axios.get(url);
+          setLoading(true);
+          const data = result.data;
+          if (data.length > 0) {
+            setBlog(data);
+            setFilteredBlog(data);
+          } else {
+            setPageFound("Notfound");
+          }
+        } catch (e) {
+          console.log(e);
+        }
+      };
+    
+      useEffect(() => {
+        let API = "http://localhost:8000/admin/admin";
+        fetchBlog(API);
+      }, []);
+
+    const getBlogData = blog.filter(blog => slugify(blog.category) === blogSlug);
 
 
     return (

@@ -1,41 +1,45 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import BlogData from "../../../data/blog/BlogData.json";
 import { slugify } from '../../../utils';
-
-
 import { useLocation } from 'react-router-dom';
-const allBlogData = BlogData;
+import axios from 'axios';
 
 
 const WidgetPost = () => {
 
-  const [items, setItems] = useState([]);
   const location = useLocation();
 
-  // Your array of 32 items
-  const allItems = allBlogData; // Replace [...] with your array of items
+  const [blog, setBlog] = useState([]);
+    const [pagefound, setPageFound] = useState("");
 
-  // Function to get random items
-  const getRandomItems = () => {
-    const randomItems = [];
+    
 
-    while (randomItems.length < 12) {
-      const randomIndex = Math.floor(Math.random() * allItems.length);
-      const randomItem = allItems[randomIndex];
+  const [items, setItems] = useState([]);
 
-      if (!randomItems.includes(randomItem)) {
-        randomItems.push(randomItem);
+  console.log("items", items)
+  
+
+  const fetchBlog = async (url) => {
+    try {
+      const result = await axios.get(url);
+      const data = result.data;
+      if (data.length > 0) {
+        setBlog(data);
+        
+      } else {
+        setPageFound("Notfound");
       }
+    } catch (e) {
+      console.log(e);
     }
-
-    setItems(randomItems);
   };
 
-  // Call getRandomItems when the location changes
   useEffect(() => {
-    getRandomItems();
-  }, [location]);
+    let API = "http://localhost:8000/admin/admin";
+    fetchBlog(API);
+  }, []);
+
+
     return (
         <div className="post-list-wrap">
         

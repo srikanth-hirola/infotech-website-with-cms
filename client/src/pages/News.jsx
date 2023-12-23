@@ -1,8 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import FooterOne from "../common/footer/FooterOne";
 import HeaderOne from "../common/header/HeaderOne";
 import SEO from "../common/SEO";
-import NewsData from "../data/news/news.json";
 import { Helmet } from "react-helmet-async";
 
 import { Link } from "react-router-dom";
@@ -10,11 +9,24 @@ import ScrollToTop from "../component/scrollToTop/ScrollToTop";
 import FooterCta from "../component/cta/FooterCta";
 import BannerThree from "../component/banner/BannerThree";
 import BcrumbBannerOne from "../elements/breadcrumb/BcrumbBannerOne";
+import { useApiCalls } from "../Hooks/useApiCalls";
 
-const allNewsData = NewsData;
-// const allData = HomeData;
 
 const News = ({ itemShow }) => {
+
+  const [loading, setLoading] = useState(false);
+  const [news, setNews] = useState([]);
+  console.log("news", news)
+  const [pagefound, setPageFound] = useState('');
+
+  const { fetchBunchData } = useApiCalls();
+
+  useEffect(() => {
+    let endpoint = 'admin/news'
+    fetchBunchData(endpoint, setLoading, setNews, setPageFound);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+}, []);
+
   return (
     <>
      
@@ -42,7 +54,7 @@ const News = ({ itemShow }) => {
           <h2 className="PressRoom">Press Room</h2>
           {/* hided three column row */}
           <div className="row d-none">
-            {allNewsData.slice(0, itemShow).map((data, index) => (
+            {news.slice(0, itemShow).map((data, index) => (
               <>
                 <div className="col-md-4  justify-content-center">
                   <a href={data.link} target="_blank">
@@ -69,7 +81,7 @@ const News = ({ itemShow }) => {
           {/* hided three column row */}
 
           <div className="row">
-            {allNewsData.slice(0, itemShow).map((data, index) => (
+            {news.slice(0, itemShow).map((data, index) => (
               <>
                 <div className="col-md-3  justify-content-center">
                   <a href={data.link} target="_blank">

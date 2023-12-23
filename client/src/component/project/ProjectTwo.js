@@ -1,12 +1,25 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import SectionTitle from '../../elements/section-title/SectionTitle';
 import ProjectPropTwo from './itemProp/ProjectPropTwo';
-import ProjectData from "../../data/project/ProjectData.json";
 import { Link } from 'react-router-dom';
+import { useApiCalls } from '../../Hooks/useApiCalls';
 
-const portfolioData = ProjectData;
 
 const ProjectTwo = () => {
+
+    const [loading, setLoading] = useState(false);
+    const [portfolios, setportfolio] = useState([]);
+    console.log("portfolios", portfolios)
+    const [pagefound, setPageFound] = useState('');
+  
+    const { fetchBunchData } = useApiCalls();
+  
+    useEffect(() => {
+      let endpoint = 'admin/portfolio'
+      fetchBunchData(endpoint, setLoading, setportfolio, setPageFound);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
     return (
         <div className="section section-padding-equal bg-color-dark">
             <div className="container">
@@ -18,7 +31,7 @@ const ProjectTwo = () => {
                 textColor=""
             />
             <div className="row row-45">
-                {portfolioData.slice(12, 16).map((data) => (
+                {portfolios.slice(12, 16).map((data) => (
                     <div className="col-md-6" key={data.id}>
                         <ProjectPropTwo projectStyle="project-style-2" portfolio={data}/>
                     </div>

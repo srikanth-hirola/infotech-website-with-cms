@@ -1,24 +1,38 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import FooterOne from '../common/footer/FooterOne';
 import HeaderOne from '../common/header/HeaderOne';
 import { Helmet } from 'react-helmet-async';
 import BcrumbBannerOne from '../elements/breadcrumb/BcrumbBannerOne';
 
-import TeamOne from '../component/team/TeamOne';
 import VideoTwo from '../component/video/VideoTwo';
-import Teamdata from '../data/team/TeamData.json'
 import { slugify } from '../utils';
 import FooterCta from '../component/cta/FooterCta';
 import TeamOverseas from '../component/team/TeamOverseas';
 import PopUpFormTwo from '../component/contact/PopUpFormTwo';
 import CounterUp from '../component/counterup/CounterUp';
+import { useApiCalls } from '../Hooks/useApiCalls';
 // import Reveal from 'react-reveal/Reveal';
-const allData = Teamdata;
 const OverseasTeam = () => {
-    const indianTeam = allData.filter(data => slugify(data.category ? data.category : "") === "india");
-    const dubaiTeam = allData.filter(data => slugify(data.category ? data.category : "") === "dubai");
+
+    const [loading, setLoading] = useState(false);
+  const [team, setTeam] = useState([]);
+  console.log("teammm", team)
+  const [pagefound, setPageFound] = useState('');
+
+
+    const indianTeam = team.filter(data => slugify(data.category ? data.category : "") === "india");
+    const dubaiTeam = team.filter(data => slugify(data.category ? data.category : "") === "dubai");
     console.log(indianTeam)
     console.log(dubaiTeam)
+
+    const { fetchBunchData } = useApiCalls();
+
+    useEffect(() => {
+        let endpoint = 'admin/team'
+        fetchBunchData(endpoint, setLoading, setTeam, setPageFound);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
     return (
         <>
      

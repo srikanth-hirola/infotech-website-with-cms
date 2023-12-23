@@ -1,47 +1,75 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FaAngleRight } from "react-icons/fa";
-import BlogData from "../../data/blog/BlogData.json";
 import { slugify } from '../../utils';
 import { useLocation } from 'react-router-dom';
+import axios from 'axios';
 
-const allBlogData = BlogData;
 
 const BlogListOne = ({colSize, itemShow}) => {
+
+    const [blog, setBlog] = useState([]);
+  const [pagefound, setPageFound] = useState("");
+  const [loading, setLoading] = useState(false);
+
     const [items, setItems] = useState([]);
     const location = useLocation();
   
     // Your array of 32 items
-    const allItems = allBlogData; // Replace [...] with your array of items
   
     // Function to get random items
-    const getRandomItems = () => {
-      const randomItems = [];
+    // const getRandomItems = () => {
+    //   const randomItems = [];
   
-      while (randomItems.length < 4) {
-        const randomIndex = Math.floor(Math.random() * allItems.length);
-        const randomItem = allItems[randomIndex];
+    //   while (randomItems.length < 4) {
+    //     const randomIndex = Math.floor(Math.random() * blog.length);
+    //     const randomItem = blog[randomIndex];
+
+    //     console.log("random index", randomIndex)
   
-        if (!randomItems.includes(randomItem)) {
-          randomItems.push(randomItem);
+    //     if (!randomItems.includes(randomItem)) {
+    //       randomItems.push(randomItem);
+    //     }
+    //   }
+  
+    //   setItems(randomItems);
+    // };
+  
+    // // Call getRandomItems when the location changes
+    // useEffect(() => {
+    //   getRandomItems();
+    // }, [location]);
+
+
+    const fetchBlog = async (url) => {
+        try {
+          const result = await axios.get(url);
+          setLoading(true);
+          const data = result.data;
+          if (data.length > 0) {
+            setBlog(data);
+            // getRandomItems();
+          } else {
+            setPageFound("Notfound");
+          }
+        } catch (e) {
+          console.log(e);
         }
-      }
-  
-      setItems(randomItems);
-    };
-  
-    // Call getRandomItems when the location changes
-    useEffect(() => {
-      getRandomItems();
-    }, [location]);
+      };
+    
+      useEffect(() => {
+        let API = "http://localhost:8000/admin/admin";
+        fetchBlog(API);
+      }, []);
+
     return (
         <>
             {items.map((data) => (
                 <div className={`${colSize}`} key={data.id}>
-                    <div className={`blog-list ${(data.id % 2  === 0) ? "border-start" : ""}`}>
+                    <div className={`blog-list ${(data.id % 2  === 0) }`}>
                         <div className="post-thumbnail">
                             <Link to={process.env.PUBLIC_URL + `/blog/${slugify(data.title)}`}>
-                                <img src={`${process.env.PUBLIC_URL}/${data.thumb}`} loading="lazy" alt="Blog Post" />
+                                <img src={`${data.large_thumb[0].url}`} loading="lazy" alt="Blog Post" />
                             </Link>
                         </div>
                         <div className="post-content">

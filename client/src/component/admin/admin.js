@@ -37,6 +37,8 @@ export default function AdminHome() {
 
   const [client, setClient] = useState([]);
 
+  console.log("client", client)
+
   let API = 'https://admin.onlinemarketingcompany.online/api/clientsdata';
 
   const fetchUser = async (url) => {

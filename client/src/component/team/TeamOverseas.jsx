@@ -1,21 +1,35 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import TeamData from "../../data/team/TeamData.json";
 import { slugify } from '../../utils';
+import { useApiCalls } from '../../Hooks/useApiCalls';
 
-const allData = TeamData;
 
 const TeamOverseas = (teamData) => {
-    const delhiTeam = allData.filter(data => slugify(data.category ? data.category : "") === "delhi");
-    const dubaiTeam = allData.filter(data => slugify(data.category ? data.category : "") === "dubai");
-    const hyderabadTeam = allData.filter(data => slugify(data.category ? data.category : "") === "hyderabad");
-    // const mumbaiTeam = allData.filter(data => slugify(data.category ? data.category : "") === "mumbai");
-    const bangaloreTeam = allData.filter(data => slugify(data.category ? data.category : "") === "bangalore");
+
+    const [loading, setLoading] = useState(false);
+  const [team, setTeam] = useState([]);
+  console.log("teammm", team)
+  const [pagefound, setPageFound] = useState('');
+
+    const delhiTeam = team.filter(data => slugify(data.category ? data.category : "") === "delhi");
+    const dubaiTeam = team.filter(data => slugify(data.category ? data.category : "") === "dubai");
+    const hyderabadTeam = team.filter(data => slugify(data.category ? data.category : "") === "hyderabad");
+    // const mumbaiTeam = team.filter(data => slugify(data.category ? data.category : "") === "mumbai");
+    const bangaloreTeam = team.filter(data => slugify(data.category ? data.category : "") === "bangalore");
     console.log(delhiTeam)
     console.log(bangaloreTeam)
     console.log(dubaiTeam)
     console.log(hyderabadTeam)
     console.log(teamData)
+
+    const { fetchBunchData } = useApiCalls();
+
+    useEffect(() => {
+        let endpoint = 'admin/team'
+        fetchBunchData(endpoint, setLoading, setTeam, setPageFound);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
     return (
         <div className="section section-padding pb--70 pb_lg--20 pb_md--0">
         <div className="container">

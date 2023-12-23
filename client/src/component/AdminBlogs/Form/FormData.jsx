@@ -58,7 +58,12 @@ export const FormData = () => {
         console.log(data.email)
         return data.filter(
             (item) =>
-                item.name.toLowerCase().includes(query)
+                item.name.toLowerCase().includes(query) ||
+                item.email.toLowerCase().includes(query) ||
+                item.company.toLowerCase().includes(query) ||
+                item.service.toLowerCase().includes(query) ||
+                item.phone.includes(query) 
+                
         );
     };
 
@@ -78,9 +83,8 @@ export const FormData = () => {
                             <Error />
                         ) : (
                             <div className="homeContent">
-                                {formData.map((value, i) => {
-                                    return (
-                                        <React.Fragment key={i}>
+                             
+                                        <React.Fragment>
                                             <DataTable
                                                 columns={columns}
                                                 data={search(formData)}
@@ -94,8 +98,6 @@ export const FormData = () => {
                                                 expandableRowsComponent={ExpandRowsComponent}
                                             ></DataTable>
                                         </React.Fragment>
-                                    );
-                                })}
                             </div>
                         )}
                     </div>

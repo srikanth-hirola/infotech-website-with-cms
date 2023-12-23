@@ -4,6 +4,7 @@ import axios from 'axios';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import { backend_url } from '../../backend_url';
 const Result = () => {
   return (
     <Alert variant="success" className="success-msg">
@@ -29,12 +30,14 @@ const PopUpFormTwo = () => {
 
   const [nameError, setError] = useState(false);
 
+  const API = backend_url;
+
   const submit = async (e) => {
     e.preventDefault();
     const nameVer = NameVali(name, email, phone, company, service);
     if (nameVer) {
       await axios
-        .post('https://admin.onlinemarketingcompany.online/api/form', {
+        .post(`${API}/admin/form`, {
           name,
           email,
           phone,

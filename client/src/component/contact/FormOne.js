@@ -3,6 +3,7 @@ import emailjs from '@emailjs/browser';
 import Alert from 'react-bootstrap/Alert';
 import axios from 'axios';
 import Form from 'react-bootstrap/Form';
+import { backend_url } from '../../backend_url';
 
 const Result = () => {
   return (
@@ -22,32 +23,35 @@ const FormOne = () => {
   const [phone, setPhone] = useState('');
   const [company, setCompany] = useState('');
   const [service, setService] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const [nameError, setError] = useState(false);
+
+  const API = backend_url
 
   const submit = async (e) => {
     e.preventDefault();
     const nameVer = NameVali(name, email, phone, company, service);
     if (nameVer) {
-      await axios
-        .post(`https://admin.onlinemarketingcompany.online/api/form`, {
+      try {
+        setLoading(true); // Set loading to true when the form is being submitted
+
+        const result = await axios.post(`${API}/admin/form`, {
           name,
           email,
           phone,
           company,
           service,
-        })
-        .then((result) => {
-          if (result.data.Status === 'Success') {
-            showresult(true);
-          }
-        })
-        .catch((e) => {
-          alert('Failed to submit form');
         });
-      // setTimeout(() => {
-      //   showresult(false);
-      // }, 5000);
+
+        if (result.data.Status === 'Success') {
+          showresult(true);
+        }
+      } catch (error) {
+        alert('Failed to submit form');
+      } finally {
+        setLoading(false); // Set loading back to false when the response is received
+      }
     }
   };
 
@@ -165,7 +169,7 @@ const FormOne = () => {
         </p>
       ) : null}
       
-      <div className="form-group">
+      {/* <div className="form-group">
         <button
           // type="submit"
           onClick={submit}
@@ -174,7 +178,30 @@ const FormOne = () => {
         >
           Get Free Quote
         </button>
+      </div> */}
+      {loading ? (
+        <div className="form-group">
+        <button
+          // onClick={submit}
+          className="axil-btn btn-fill-primary btn-fluid btn-primary"
+          name="submit-btn"
+          // disabled={loading} // Disable the button when loading is true
+        >
+          Loading....
+        </button>
       </div>
+      ) : (
+        <div className="form-group">
+          <button
+            onClick={submit}
+            className="axil-btn btn-fill-primary btn-fluid btn-primary"
+            name="submit-btn"
+            disabled={loading} // Disable the button when loading is true
+          >
+            Get Free Quote
+          </button>
+        </div>
+      )}
       <div className="form-group">{result ? <Result /> : null}</div>
     </form>
   );

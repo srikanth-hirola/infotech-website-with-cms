@@ -75,7 +75,7 @@ export const FormInputsPortfolio = ({ portfolio, setPortfolio, endpoint }) => {
                         />
                         <button
                             variant="outline-primary"
-                            className="update_button"
+                            className="update_button btn btn-sm btn-primary"
                             onClick={(e) => handleAddCategory(e, categoryDropDown, setCategoryDropDown, category, endpoint, 'portfolioCategory')}
                         >ADD</button>
                     </div>
@@ -99,7 +99,7 @@ export const FormInputsPortfolio = ({ portfolio, setPortfolio, endpoint }) => {
                     <Form.Label>Body</Form.Label>
                     <button
                         variant="outline-primary"
-                        className="update_button"
+                        className="update_button btn btn-sm btn-primary"
                         onClick={(e) => handleAddDataArray(e, 'body', portfolio, setPortfolio, '')}
                     >ADD</button>
                 </div>

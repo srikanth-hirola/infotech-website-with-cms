@@ -10,7 +10,6 @@ import SectionTitle from '../elements/section-title/SectionTitle';
 
 import CounterUp from '../component/counterup/CounterUp';
 import ScrollToTop from '../component/scrollToTop/ScrollToTop';
-import BlogData from "../data/blog/BlogData.json";
 import BlogDataHome from '../component/blog/BlogDataHome';
 
 import { Helmet } from 'react-helmet-async';
@@ -27,10 +26,11 @@ import PopUpFormTwo from '../component/contact/PopUpFormTwo';
 
 // import Reveal from 'react-reveal/Reveal';
 
-const allBlogData = BlogData;
 // const allData = HomeData;
 
 const DigitalAgency = () => {
+
+
 
     return (
         <>

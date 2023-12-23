@@ -1,12 +1,36 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {flatDeep, slugify, containsObject} from '../../../utils';
-import BlogData from "../../../data/blog/BlogData.json";
+import axios from 'axios';
 
 
 const WidgetCategory = () => {
 
-    const cats = BlogData.map(data => {
+    const [blog, setBlog] = useState([]);
+    const [filteredBlog, setFilteredBlog] = useState([]);
+    const [pagefound, setPageFound] = useState("");
+
+    const fetchBlog = async (url) => {
+        try {
+          const result = await axios.get(url);
+          const data = result.data;
+          if (data.length > 0) {
+            setBlog(data);
+            setFilteredBlog(data);
+          } else {
+            setPageFound("Notfound");
+          }
+        } catch (e) {
+          console.log(e);
+        }
+      };
+    
+      useEffect(() => {
+        let API = "http://localhost:8000/admin/admin";
+        fetchBlog(API);
+      }, []);
+
+    const cats = blog.map(data => {
         return data.category;
     });
 

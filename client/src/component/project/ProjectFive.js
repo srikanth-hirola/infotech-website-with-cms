@@ -1,10 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ProjectPropOne from "./itemProp/ProjectPropOne";
-import ProjectData from "../../data/project/ProjectData.json";
+import { useApiCalls } from "../../Hooks/useApiCalls";
 
-const AllData = ProjectData;
 
 const ProjectFive = ({ colSize, parentClass, perPageShow }) => {
+
+  const [loading, setLoading] = useState(false);
+  const [portfolios, setportfolio] = useState([]);
+  console.log("portfolios", portfolios)
+  const [pagefound, setPageFound] = useState('');
+
+  const { fetchBunchData } = useApiCalls();
+
+  useEffect(() => {
+    let endpoint = 'admin/portfolio'
+    fetchBunchData(endpoint, setLoading, setportfolio, setPageFound);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+}, []);
 
 
   return (
@@ -19,7 +31,7 @@ const ProjectFive = ({ colSize, parentClass, perPageShow }) => {
             colSize ? colSize : "row-cols-sm-2 row-cols-xl-3"
           }`}
         >
-          {AllData.map((portfoliData) => (
+          {portfolios.map((portfoliData) => (
             <div className="col" key={portfoliData.id}>
               <ProjectPropOne projectStyle="" portfolio={portfoliData} />
             </div>

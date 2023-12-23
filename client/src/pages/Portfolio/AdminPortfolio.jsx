@@ -3,7 +3,7 @@ import { PortfolioList } from '../../component/AdminBlogs/Portfolio/PortfolioLis
 import { SideBar } from '../../component/AdminBlogs/SideBar'
 import Footer from '../../component/AdminBlogs/Constants/footer'
 
-export const AdminPortfolio = () => {
+const AdminPortfolio = () => {
     return (
         <>
             <div className='admin-home-parent'>
@@ -16,3 +16,5 @@ export const AdminPortfolio = () => {
         </>
     )
 }
+
+export default AdminPortfolio;

@@ -1,16 +1,31 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import TeamData from "../../data/team/TeamData.json";
 import { slugify } from '../../utils';
+import { useApiCalls } from '../../Hooks/useApiCalls';
 
-const allData = TeamData;
 
 const AboutSix = () => {
-    // const delhiTeam = allData.filter(data => slugify(data.category ? data.category : "") === "delhi");
-    const dubaiTeam = allData.filter(data => slugify(data.category ? data.category : "") === "dubai");
-    // const hyderabadTeam = allData.filter(data => slugify(data.category ? data.category : "") === "hyderabad");
-    // const mumbaiTeam = allData.filter(data => slugify(data.category ? data.category : "") === "mumbai");
-    const bangaloreTeam = allData.filter(data => slugify(data.category ? data.category : "") === "bangalore");
+
+    const [loading, setLoading] = useState(false);
+  const [team, setTeam] = useState([]);
+  console.log("teammm", team)
+  const [pagefound, setPageFound] = useState('');
+
+    
+    // const delhiTeam = team.filter(data => slugify(data.category ? data.category : "") === "delhi");
+    const dubaiTeam = team.filter(data => slugify(data.category ? data.category : "") === "dubai");
+    // const hyderabadTeam = team.filter(data => slugify(data.category ? data.category : "") === "hyderabad");
+    // const mumbaiTeam = team.filter(data => slugify(data.category ? data.category : "") === "mumbai");
+    const bangaloreTeam = team.filter(data => slugify(data.category ? data.category : "") === "bangalore");
+
+    const { fetchBunchData } = useApiCalls();
+
+    useEffect(() => {
+        let endpoint = 'admin/team'
+        fetchBunchData(endpoint, setLoading, setTeam, setPageFound);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
   return (
     <>
  <div className="section-padding-equal">
@@ -33,7 +48,7 @@ const AboutSix = () => {
                         <div className="team-grid">
                             <div className="thumbnail">
                                 <Link to={process.env.PUBLIC_URL + `/team-details/${slugify(data.title)}`}>
-                                    <img src={process.env.PUBLIC_URL + data.thumb} loading="lazy" alt={data.title} />
+                                    <img src={process.env.PUBLIC_URL + data.thumb.url} loading="lazy" alt={data.title} />
                                 </Link>
                             </div>
                             <div className="content">
@@ -57,7 +72,7 @@ const AboutSix = () => {
                         <div className="team-grid">
                             <div className="thumbnail">
                                 <Link to={process.env.PUBLIC_URL + `/team-details/${slugify(data.title)}`}>
-                                    <img src={process.env.PUBLIC_URL + data.thumb} loading="lazy" alt={data.title} />
+                                    <img src={process.env.PUBLIC_URL + data.thumb.url} loading="lazy" alt={data.title} />
                                 </Link>
                             </div>
                             <div className="content">

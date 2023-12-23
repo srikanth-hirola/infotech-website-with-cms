@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom';
 // import Reveal from 'react-reveal/Reveal';
 
 
-const BlogGridView = ({title, }) => {
+const BlogGridView = ({title }) => {
 
     return (
         <>

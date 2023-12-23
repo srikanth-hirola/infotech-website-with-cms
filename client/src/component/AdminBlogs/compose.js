@@ -44,18 +44,21 @@ const Compose = () => {
       <Container>
         <div>
           <ToastContainer />
-          <h1>Compose New Blog</h1>
-          <Form>
-            <FormInputs blogData={blogData} setBlogData={setBlogData} />
-            <Button
+          <div className='col-md-12 sticky-top'>
+          <h1 className='compose-blog-title'>Compose New Blog</h1>
+          <Button
               variant="outline-primary"
-              className="update_button"
+              className="update_button sticky-top"
               type="submit"
               name="sub"
               onClick={submit}
             >
               Publish
             </Button>
+          </div>
+          <Form>
+            <FormInputs blogData={blogData} setBlogData={setBlogData} />
+            
           </Form>
         </div>
       </Container>

@@ -1,12 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import Slider from "react-slick";
 
-import Data from "../../data/news/news.json";
 import { Link } from "react-router-dom";
-const newsData = Data;
+import { useApiCalls } from "../../Hooks/useApiCalls";
 
 const News = ({ colSize, itemShow, testimonialData, layoutStyle }) => {
+
+  const [loading, setLoading] = useState(false);
+  const [news, setNews] = useState([]);
+  console.log("news", news)
+  const [pagefound, setPageFound] = useState('');
+
+  const { fetchBunchData } = useApiCalls();
+
+  useEffect(() => {
+    let endpoint = 'admin/news'
+    fetchBunchData(endpoint, setLoading, setNews, setPageFound);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+}, []);
+
   function SlickNextArrow(props) {
     const { className, onClick } = props;
     return (
@@ -76,7 +89,7 @@ const News = ({ colSize, itemShow, testimonialData, layoutStyle }) => {
   return (
     <>
       <Slider {...slideSettings} className="slick-arrow-nav">
-        {newsData.slice(0, itemShow).map((data, index) => (
+        {news.slice(0, itemShow).map((data, index) => (
           <div className="col-md-6 justify-content-center crp" style={{cursor:"pointer"}}>
            <a href={data.link} target='_blank'>
            <div className="news-card news-card-home">

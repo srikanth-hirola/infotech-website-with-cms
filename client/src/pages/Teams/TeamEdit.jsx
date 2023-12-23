@@ -3,7 +3,7 @@ import { SideBar } from '../../component/AdminBlogs/SideBar'
 import Footer from '../../component/AdminBlogs/Constants/footer'
 import { EditTeam } from '../../component/AdminBlogs/Teams/EditTeam'
 
-export const TeamEdit = () => {
+const TeamEdit = () => {
     return (
         <>
             <div className='admin-home-parent'>
@@ -16,3 +16,5 @@ export const TeamEdit = () => {
         </>
     )
 }
+
+export default TeamEdit;

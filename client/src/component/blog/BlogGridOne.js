@@ -1,17 +1,18 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import BlogData from "../../data/blog/BlogData.json";
 import { slugify } from '../../utils';
 import { FaPlay, FaAngleRight, FaAngleLeft, FaArrowRight, FaArrowLeft } from "react-icons/fa";
 import FsLightbox from 'fslightbox-react';
 import Slider from "react-slick";
 import ReactPaginate from 'react-paginate';
-
-
-const allBlogData = BlogData;
+import axios from 'axios';
 
 
 const BlogGridOne = () => {
+
+    const [blogs, setBlog] = useState([]);
+    console.log("complete blog data", blogs)
+  const [pagefound, setPageFound] = useState("");
 
     const [toggler, setToggler] = useState(false);
     
@@ -40,7 +41,7 @@ const BlogGridOne = () => {
        
     }
 
-    const [blogs] = useState(allBlogData);
+    // const [blogs] = useState(allBlogData);
     const [pageNumber, setPageNumber] = useState(0);
 
     const blogsPerPage = 8;
@@ -53,23 +54,69 @@ const BlogGridOne = () => {
     }
     const lastBlogs = blogs.slice(blogsPerPage).reverse();
 console.log("reversed blogs",lastBlogs)
+
+const fetchBlog = async (url) => {
+    try {
+      const result = await axios.get(url);
+      const data = result.data;
+      if (data.length > 0) {
+        setBlog(data);
+      } else {
+        setPageFound("Notfound");
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  useEffect(() => {
+    let API = "http://localhost:8000/admin/admin";
+    fetchBlog(API);
+  }, []);
+
+
+  function formatDate(inputDate) {
+    console.log(inputDate)
+    const dateObject = new Date(inputDate);
+
+    
+    // Get date, month name, and year
+    const day = dateObject.getDate();
+    const monthName1 = dateObject.getMonth()
+    const year = dateObject.getFullYear();
+
+   
+    
+    const month = dateObject.toLocaleString('default', { month: 'short' });
+    console.log(month)
+    
+    // Get the month name based on the month index
+    const monthName = month;
+    
+// console.log(`${day} ${month} ${year}`)
+    // Return the formatted result
+    return `${day} ${monthName} ${year}`
+  }
+  
+
+
     return (
         <>
-            {lastBlogs.slice(pageVisited, pageVisited + blogsPerPage).map((data) => (
+            {blogs.slice(pageVisited, pageVisited + blogsPerPage).map((data) => (
                 <div className="blog-grid" key={data.id}>
                     <h3 className="title">
                         <Link to={process.env.PUBLIC_URL + `/blog/${slugify(data.title)}`}>{data.title}</Link>
                     </h3>
                     <div className="author">
                         <div className="author-thumb">
-                            <img src={`${process.env.PUBLIC_URL}/${data.author_avatar}`} loading="lazy" alt="Blog Author" className='aathr' />
+                            <img src="https://res.cloudinary.com/dq6ok3jsu/image/upload/v1702638627/logo_dvdzrb.svg" loading="lazy" alt="Blog Author" className='aathr' />
                         </div>
                         <div className="info">
                             <h6 className="author-name">
-                                <Link to={process.env.PUBLIC_URL + `/archive/${slugify(data.author_name)}`}>{data.author_name}</Link>
+                                <Link to={process.env.PUBLIC_URL + `/archive/${slugify(data.author.author_name)}`}>{data.author.author_name}</Link>
                             </h6>
                             <ul className="blog-meta list-unstyled">
-                                <li>{data.post_date}</li>
+                                <li>{data?.createdAt ? formatDate(data?.createdAt) : data?.post_date}</li>
                                 <li>{data.read_time}</li>
                             </ul>
                         </div>
@@ -129,7 +176,6 @@ console.log("reversed blogs",lastBlogs)
                 disabledClassName={"disabled"}
                 activeClassName={"current"}
             />
-
         </>
     )
 }

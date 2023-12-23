@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import FooterOne from "../common/footer/FooterOne";
 import HeaderOne from "../common/header/HeaderOne";
-import BlogData from "../data/blog/BlogData.json";
+// import BlogData from "../data/blog/BlogData.json";
 import BreadCrumbOne from "../elements/breadcrumb/BreadCrumbOne";
 import BlogSidebar from "../component/blog/BlogSidebar";
 import BlogAuthor from "../component/blog/BlogAuthor";
@@ -14,9 +14,11 @@ import Slider from "react-slick";
 import BlogListOne from "../component/blog/BlogListOne";
 import FooterCta from "../component/cta/FooterCta";
 import { slugify } from "../utils";
+import axios from "axios";
+import { sanitize } from "dompurify";
 // import Reveal from 'react-reveal/Reveal';
 
-const allBlogData = BlogData;
+// const allBlogData = BlogData;
 
 const BlogDetails = () => {
   // this is for using slug of the blog
@@ -29,13 +31,41 @@ const BlogDetails = () => {
 
   // this is for using slugify with title of the blog
 
+  const [allBlogData, setBlog] = useState([]);
+  console.log("complete blog data", allBlogData)
+  const [pagefound, setPageFound] = useState("");
+  const [loading, setLoading] = useState(false);
+  
   const params = useParams();
   const blogSlug = params.slug;
+
+  const fetchBlog = async (url) => {
+    try {
+      const result = await axios.get(url);
+      setLoading(true);
+      const data = result.data;
+      console.log("blog details page", data)
+      if (data.length > 0) {
+        setBlog(data);
+      } else {
+        setPageFound("Notfound");
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  useEffect(() => {
+    let API = "http://localhost:8000/admin/admin";
+    fetchBlog(API);
+  }, []);
 
   const getBlogData = allBlogData.filter(
     (data) => slugify(data.title) === blogSlug
   );
+  console.log("getblogdata", getBlogData)
   const detailsBlog = getBlogData[0];
+  console.log("detailsblog", detailsBlog)
 
   const [toggler, setToggler] = useState(false);
 
@@ -67,13 +97,16 @@ const BlogDetails = () => {
     prevArrow: <SlickPrevArrow />,
   };
 
+  
+
+
   return (
     <>
       <Helmet>
-        <title>{detailsBlog.metaTitle}</title>
+        <title>{detailsBlog?.metaTitle}</title>
         <meta
           name="description"
-          content={detailsBlog.metaDescription}
+          content={detailsBlog?.metaDescription}
           data-rh="true"
         />
       </Helmet>
@@ -81,7 +114,7 @@ const BlogDetails = () => {
       <main className="main-wrapper">
         <HeaderOne />
         {/* <Reveal effect="fadeInUp" duration={900}> */}
-        <BreadCrumbOne title={detailsBlog.title} page="Blog" />
+        <BreadCrumbOne title={detailsBlog?.title} page="Blog" />
         <div className="section-padding-equal">
           <div className="container">
             <div className="row row-40">
@@ -102,19 +135,19 @@ const BlogDetails = () => {
                                                 : <img src={`${process.env.PUBLIC_URL}/${detailsBlog.large_thumb}`} loading="lazy" alt="Blog" />
                                             } */}
 
-                                            {Array.isArray(detailsBlog.thumb) ? (
+                                            {Array.isArray(detailsBlog?.large_thumb) ? (
         <Slider {...slideSettings} className="slick-arrow-nav">
-            {detailsBlog.thumb.map((data, index) => (
+            {detailsBlog?.large_thumb.map((data, index) => (
                 <div className="slide-item" key={index}>
                     <img src={data.url} loading="lazy" alt="Blog" />
                 </div>
             ))}
         </Slider>
     ) : (
-        <img src={detailsBlog.thumb.url} loading="lazy" alt="Blog" />
+        <img src={detailsBlog?.large_thumb[0].url} loading="lazy" alt="Blog" />
     )}
 
-                      {detailsBlog.format === "video" ? (
+                      {detailsBlog?.format === "video" ? (
                         <>
                           <div className="popup-video">
                             <button
@@ -138,7 +171,7 @@ const BlogDetails = () => {
                     <div className="author">
                       <div className="author-thumb">
                         <img
-                          src={`${process.env.PUBLIC_URL}/${detailsBlog.author_avatar}`}
+                          src="https://res.cloudinary.com/dq6ok3jsu/image/upload/v1702638627/logo_dvdzrb.svg"
                           loading="lazy"
                           alt="Blog Author"
                           className="aathr"
@@ -146,11 +179,11 @@ const BlogDetails = () => {
                       </div>
                       <div className="info">
                         <h6 className="author-name">
-                          {detailsBlog.author_name}
+                          {detailsBlog?.author.author_name}
                         </h6>
                         <ul className="blog-meta list-unstyled">
-                          <li>{detailsBlog.post_date}</li>
-                          <li>{detailsBlog.read_time}</li>
+                          {/* <li>{detailsBlog?.post_date}</li> */}
+                          <li>{detailsBlog?.read_time}</li>
                         </ul>
                       </div>
                     </div>
@@ -158,25 +191,32 @@ const BlogDetails = () => {
                       {/* <p>{detailsBlog.blogSubDescription}</p> */}
                     </p>
                     {/* <p>{detailsBlog.blogDescription}</p> */}
-                    {detailsBlog.body.map((data, i) => (
                       <div
-                        key={i}
-                        dangerouslySetInnerHTML={{ __html: data }}
+                        dangerouslySetInnerHTML={{
+                          __html: sanitize(detailsBlog?.body),
+                        }}
                       ></div>
-                    ))}
+                   
 
                     <div className="row">
-                      {detailsBlog.features_img.map((img, i) => (
-                        <div className="col-6" key={i}>
+                        <div className="col-6">
                           <div className="featured-img">
                             <img
-                              src={process.env.PUBLIC_URL + img}
+                              src="https://res.cloudinary.com/dq6ok3jsu/image/upload/v1701951614/blog-8_iwnpyz.png"
                               loading="lazy"
-                              alt="Blog"
+                              alt="blog image"
                             />
                           </div>
                         </div>
-                      ))}
+                        <div className="col-6">
+                          <div className="featured-img">
+                            <img
+                              src="https://res.cloudinary.com/dq6ok3jsu/image/upload/v1701951615/blog-9_djyuyq.png"
+                              loading="lazy"
+                              alt="blog image"
+                            />
+                          </div>
+                        </div>
                     </div>
                   </div>
                 </div>
