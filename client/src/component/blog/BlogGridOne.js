@@ -11,7 +11,7 @@ import axios from 'axios';
 const BlogGridOne = () => {
 
     const [blogs, setBlog] = useState([]);
-    console.log("complete blog data", blogs)
+   
   const [pagefound, setPageFound] = useState("");
 
     const [toggler, setToggler] = useState(false);
@@ -68,9 +68,9 @@ const fetchBlog = async (url) => {
       console.log(e);
     }
   };
-
+  console.log("complete blog data", blogs)
   useEffect(() => {
-    let API = "http://localhost:8000/admin/admin";
+    let API = "https://api.hirolainfotech.com/admin/admin";
     fetchBlog(API);
   }, []);
 
@@ -105,7 +105,7 @@ const fetchBlog = async (url) => {
             {blogs.slice(pageVisited, pageVisited + blogsPerPage).map((data) => (
                 <div className="blog-grid" key={data.id}>
                     <h3 className="title">
-                        <Link to={process.env.PUBLIC_URL + `/blog/${slugify(data.title)}`}>{data.title}</Link>
+                        <Link to={process.env.PUBLIC_URL + `/blog/${data?.slug}`}>{data.title}</Link>
                     </h3>
                     <div className="author">
                         <div className="author-thumb">
@@ -132,7 +132,7 @@ const fetchBlog = async (url) => {
                                 ))}
                                 
                             </Slider> 
-                            : <Link to={process.env.PUBLIC_URL + `/blog/${slugify(data.title)}`}><img src={`${process.env.PUBLIC_URL}/${data.large_thumb}`} loading="lazy" alt="Blog" /></Link>
+                            : <Link to={process.env.PUBLIC_URL + `/blog/${data?.slug}`}><img src={`${process.env.PUBLIC_URL}/${data.large_thumb}`} loading="lazy" alt="Blog" /></Link>
                         } */}
                         {
         Array.isArray(data.large_thumb) ? (
@@ -144,7 +144,7 @@ const fetchBlog = async (url) => {
                 ))}
             </Slider>
         ) : (
-            <Link to={process.env.PUBLIC_URL + `/blog/${slugify(data.title)}`}>
+            <Link to={process.env.PUBLIC_URL + `/blog/${data?.slug}`}>
                 <img src={data.large_thumb.url} loading="lazy" alt="Blog" />
             </Link>
         )
@@ -161,7 +161,7 @@ const fetchBlog = async (url) => {
                         }  
                     </div>
                     <p>{data.excerpt}</p>
-                    <Link className="axil-btn btn-borderd btn-large" to={process.env.PUBLIC_URL + `/blog/${slugify(data.title)}`}>Read More</Link>
+                    <Link className="axil-btn btn-borderd btn-large" to={process.env.PUBLIC_URL + `/blog/${data?.slug}`}>Read More</Link>
                 </div>
             ))}
 

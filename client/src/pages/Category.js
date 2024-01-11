@@ -40,12 +40,13 @@ const BlogCategory = () => {
       };
     
       useEffect(() => {
-        let API = "http://localhost:8000/admin/admin";
+        let API = "https://api.hirolainfotech.com/admin/admin";
         fetchBlog(API);
       }, []);
 
     const getBlogData = blog.filter(blog => slugify(blog.category) === blogSlug);
 
+    console.log("category Blogs", getBlogData)
 
     return (
         <>

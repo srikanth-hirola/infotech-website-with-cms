@@ -21,7 +21,7 @@ const Blog = () => {
 
   const navigate = useNavigate();
 
-  let API = `http://localhost:8000/admin/blog/${slugURL}`;
+  let API = `https://api.hirolainfotech.com/admin/blog/${slugURL}`;
 
   const fetchBlog = async (url) => {
     try {

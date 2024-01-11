@@ -28,7 +28,7 @@ export const SideBar = () => {
       <Navbar.Brand>
         <Link to="/admin">
           <img
-            src="/images/White-logo.png" // Replace with the actual path to your logo
+            // src="/images/logo-3.png" // Replace with the actual path to your logo
             width="90%"
             height="30"
             className="d-inline-block align-top"

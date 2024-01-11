@@ -60,7 +60,7 @@ const handleCategoryChange = (category) => {
 
   const filterData = () => {
     if (selectedCategory === '' || selectedCategory === 'All Works'){
-      return portfolios.slice(0,9);  
+      return portfolios.slice(0,12);  
     }
     return portfolios.filter(obj =>
       obj.category.some(category => category.toLowerCase().includes(selectedCategory.toLowerCase()))
@@ -113,10 +113,12 @@ const handleCategoryChange = (category) => {
       ))}
    
       </div>
-        <div className='row justify-content-between'>
+        {/* <div className='row justify-content-between'> */}
+        <div className='row justify-content-start'>
            {
-            filteredData.map((portfolio)=>(
-                <div className="col-md-6 col-lg-4 col-xl-4 pot-cards">
+            filteredData.reverse().map((portfolio)=>(
+              
+                <div className="col-md-6 col-lg-2 col-xl-2 "> {/* Use class of pot-cards if required  */}
                 {/* <Tilty perspective={12000} reset={true}> */}
                 <div className='project-grid active '>
 				<div className="thumbnail">

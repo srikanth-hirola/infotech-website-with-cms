@@ -311,8 +311,11 @@
 // Single Blog
 
 .single-blog {
-    ul li {
-        padding: 6px 0px;
+    ul {
+        padding: 0;
+        li {
+            padding: 6px 0px;
+        }
     }
     .single-blog-content {
         .post-thumbnail {
@@ -324,9 +327,32 @@
         .author {
             margin-bottom: 30px;
         }
+        strong{
+            font-weight: 600;
+        }
         p {
-            margin-bottom: 30px;
+            margin-bottom: 10px;
             line-height: 1.7;
+        }
+        h1{
+            font-size: 50px;
+        }
+        h2{
+            font-size: 40px;
+            margin-top: 20px;
+        }
+        h3{
+            margin-top: 25px;
+    margin-bottom: 12px;
+    font-size: 30px;
+        }
+        h4{
+            font-size: 24px;
+            font-weight: 400;
+            margin-bottom: 12px;
+        }
+        h5{
+            font-size: 20px;
         }
         .wp-block-quote {
             margin: 50px 0;
@@ -641,3 +667,62 @@ img.aathr {
     width: 200px;
     height: 80px;
 }
+.single-blog .single-blog-content h6 {
+     background: linear-gradient(90deg, rgb(255, 116, 37) 8%, rgb(0, 0, 0) 83%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: rgba(0, 0, 0, 0);
+    margin-bottom: 6px;
+}
+
+// .single-blog .single-blog-content h5 {
+//      background: linear-gradient(90deg, rgb(255, 116, 37) 8%, rgb(0, 0, 0) 83%);
+//     -webkit-background-clip: text;
+//     -webkit-text-fill-color: rgba(0, 0, 0, 0);
+// }
+
+// .single-blog .single-blog-content h4 {
+//      background: linear-gradient(90deg, rgb(255, 116, 37) 8%, rgb(0, 0, 0) 83%);
+//     -webkit-background-clip: text;
+//     -webkit-text-fill-color: rgba(0, 0, 0, 0);
+// }
+
+// .single-blog .single-blog-content h3 {
+//      background: linear-gradient(90deg, rgb(255, 116, 37) 8%, rgb(0, 0, 0) 83%);
+//     -webkit-background-clip: text;
+//     -webkit-text-fill-color: rgba(0, 0, 0, 0);
+// }
+
+.single-blog .single-blog-content h1 {
+     background: linear-gradient(90deg, rgb(255, 116, 37) 8%, rgb(0, 0, 0) 83%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: rgba(0, 0, 0, 0);
+}
+
+// .single-blog .single-blog-content strong {
+//     background: linear-gradient(90deg, rgb(255, 116, 37) 8%, rgb(0, 0, 0) 83%);
+//     -webkit-background-clip: text;
+//     -webkit-text-fill-color: rgba(0, 0, 0, 0);
+// }
+
+// .single-blog .single-blog-content strong span {
+//     background: linear-gradient(90deg, rgb(255, 116, 37) 8%, rgb(0, 0, 0) 83%);
+//     -webkit-background-clip: text;
+//     -webkit-text-fill-color: rgba(0, 0, 0, 0);
+// }
+
+.fixed-form {
+    // position: fixed;
+    display: none;
+    top: 0;
+    width: 25%; /* Adjust the width as needed */
+    /* Additional styles for the fixed position */
+    /* Example styles */
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+  }
+  
+  /* Additional styles to prevent content jumping when fixing */
+  .sticky-sidebar.fixed-form + .sticky-form {
+    margin-top: 220px; /* Adjust as needed */
+  }

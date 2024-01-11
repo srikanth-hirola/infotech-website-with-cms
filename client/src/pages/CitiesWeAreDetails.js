@@ -218,7 +218,7 @@ const CitiesWeAreDetails = () => {
    <div className="section section-padding bg-color-light pb--80 pb_lg--40 pb_md--20">
             <div className="container">
                 <SectionTitle 
-                    subtitle="Our Valus"
+                    subtitle="Our Values"
                     title={detailsService.ServiceInformation.title}
                     description={detailsService.ServiceInformation.description}
                     textAlignment="heading-left heading-light-left mb--100 text-white"

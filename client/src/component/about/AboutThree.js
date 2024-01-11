@@ -37,7 +37,7 @@ const AboutThree = () => {
         <div className="section section-padding bg-color-dark pb--80 pb_lg--40 pb_md--20">
             <div className="container">
                 <SectionTitle 
-                    subtitle="Our Valus"
+                    subtitle="Our Values"
                     title="Why should you work with us?"
                     description="Nulla facilisi. Nullam in magna id dolor blandit rutrum eget vulputate augue sed eu leo eget risus imperdiet."
                     textAlignment="heading-left heading-light-left mb--100"

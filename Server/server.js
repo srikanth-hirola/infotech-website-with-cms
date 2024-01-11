@@ -55,8 +55,8 @@ cloudinary.config({
 app.use('/', frontEndRoutes);
 app.use('/admin', adminRoutes);
 
-app.get('/res', (req, res) => {
-  console.log("first")
+app.get('/api', (req, res) => {
+  res.send("Api");
 });
 
 app.listen(PORT, () => {

@@ -11,7 +11,7 @@ const TeamPropOne = (teamData) => {
         <div className="section section-padding bg-color-dark pb--70 pb_lg--20 pb_md--0">
         <div className="container">
             <div className="section-heading heading-light">
-            <span className="subtitle">Our valus</span>
+            <span className="subtitle">Our Values</span>
             <h2 className="title mb--50">Meet The Team</h2>
             <p>Nulla facilisi. Nullam in magna id dolor 
                 blandit rutrum eget vulputate augue sed eu leo eget risus imperdiet.</p>

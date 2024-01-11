@@ -58,7 +58,7 @@ const BlogListOne = ({colSize, itemShow}) => {
       };
     
       useEffect(() => {
-        let API = "http://localhost:8000/admin/admin";
+        let API = "https://api.hirolainfotech.com/admin/admin";
         fetchBlog(API);
       }, []);
 

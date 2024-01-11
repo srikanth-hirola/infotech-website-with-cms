@@ -68,7 +68,7 @@ const DigitalAgency = () => {
             
            <WhyUsSection/>
            <HomeCaseStudy/>
-            <FilteredDataComponent />
+            {/* <FilteredDataComponent /> */}
 <HomeTextAnimation/>
 <div className="container ">
 <div className="news-section">

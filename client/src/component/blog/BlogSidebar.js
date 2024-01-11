@@ -1,16 +1,41 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import WidgetPost from './widget/WidgetPost';
 import WidgetCategory from './widget/WidgetCategory';
-import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn, FaPinterest, FaYoutube} from "react-icons/fa";
+import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn, FaPinterest, FaYoutube } from "react-icons/fa";
+import axios from 'axios';
+import FormOne from '../contact/FormOne';
 
 const BlogSidebar = () => {
+    const [blogs, setBlog] = useState([]);
+    const [pagefound, setPageFound] = useState("");
+
+    const fetchBlog = async (url) => {
+        try {
+            const result = await axios.get(url);
+            const data = result.data;
+            if (data.length > 0) {
+                setBlog(data);
+            } else {
+                setPageFound("Notfound");
+            }
+        } catch (e) {
+            console.log(e);
+        }
+    };
+
+    useEffect(() => {
+        let API = "https://api.hirolainfotech.com/admin/admin";
+        fetchBlog(API);
+    }, []);
+
     return (
         <div className="axil-sidebar">
-           
+
             <div className="widget widget-categories">
+        <FormOne/>
                 <h4 className="widget-title">Categories</h4>
-                <WidgetCategory />
+                <WidgetCategory blogs={blogs} />
             </div>
             <div className="widget widge-social-share">
                 <div className="blog-share">
@@ -27,13 +52,14 @@ const BlogSidebar = () => {
             </div>
             <div className="widget widget-recent-post">
                 <h4 className="widget-title">Recent post</h4>
-                <WidgetPost />
+                <WidgetPost blogs={blogs} />
+                <FormOne/>
             </div>
-            <div className="widget widget-banner-ad">
+            {/* <div className="widget widget-banner-ad" id="stickyBanner">
                 <Link to="#">
                     <img src={process.env.PUBLIC_URL + "/images/banner/widget-banner.png"} loading="lazy" alt="banner" />
                 </Link>
-            </div>
+            </div> */}
         </div>
     )
 }

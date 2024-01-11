@@ -43,7 +43,7 @@ const AboutSix = () => {
             <h4 className="title mb--50">Our Bangalore Team</h4>
             </div>
             <div className="row">
-                {bangaloreTeam.map((data) => (
+                {bangaloreTeam.reverse(3,...bangaloreTeam).map((data) => (
                     <div className="col-xl-3 col-sm-6 team-list " key={data.id}>
                         <div className="team-grid">
                             <div className="thumbnail">

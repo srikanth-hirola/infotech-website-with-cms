@@ -214,7 +214,7 @@ const Kolkata = () => {
    <div className="section section-padding bg-color-light  pb_lg--40 pb_md--20">
             <div className="container">
                 <SectionTitle 
-                    subtitle="Our Valus"
+                    subtitle="Our Values"
                     title={allCitiesData.ServiceInformation.title}
                     description={allCitiesData.ServiceInformation.description}
                     textAlignment="heading-left heading-light-left mb--100 text-white"

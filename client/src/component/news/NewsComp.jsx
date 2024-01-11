@@ -86,6 +86,7 @@ const News = ({ colSize, itemShow, testimonialData, layoutStyle }) => {
       },
     ],
   };
+  console.log(news.map((data)=>data.Dimage.url))
   return (
     <>
       <Slider {...slideSettings} className="slick-arrow-nav">

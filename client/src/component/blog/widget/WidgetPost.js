@@ -35,19 +35,22 @@ const WidgetPost = () => {
   };
 
   useEffect(() => {
-    let API = "http://localhost:8000/admin/admin";
+    let API = "https://api.hirolainfotech.com/admin/admin";
     fetchBlog(API);
   }, []);
+console.log("recent blogs",blog);
+
+
 
 
     return (
         <div className="post-list-wrap">
         
-        {items.map((data, index) => (
+        {blog.slice(-5).map((data, index) => (
             <div className="single-post" key={index}>
                 <div className="post-thumbnail">
                     <Link to={process.env.PUBLIC_URL + `/blog/${slugify(data.title)}`}>
-                        <img src={`${data.thumb.url}`} loading="lazy" alt="Blog" />
+                        <img src={`${data.large_thumb[0].url}`} loading="lazy" alt="Blog" />
                     </Link>
                 </div>
                 <div className="post-content">

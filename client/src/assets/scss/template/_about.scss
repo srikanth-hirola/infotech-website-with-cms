@@ -316,7 +316,7 @@
     }
 }
 .vertical-timeline::before{
-    background: var(--gradient-button);
+    background: var(--gradient-button) !important;
     @media #{$sm-layout} {
         top: 0;
     left: 90%;
@@ -328,7 +328,7 @@
     }
     @media #{$smlg-device} {
         position: absolute;
-        left: 93.5%;
+        left: 93.5% !important;
     }
 }
 .vertical-timeline-element {

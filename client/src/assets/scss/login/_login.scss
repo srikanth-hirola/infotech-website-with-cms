@@ -93,12 +93,14 @@
     .admin-login-page-form-section input {
         border-radius: 6px;
         border: 1px solid #FFF;
-        color: #fff;
+        color: #000;
         padding: 12px 13px;
         /* background: red !important; */
         width: 100%;
         background: #fff !important;
         mix-blend-mode: multiply;
+        font-family: var(--font-secondary);
+    letter-spacing: 2px;
     }
     
     

@@ -16,26 +16,49 @@ import FooterCta from "../component/cta/FooterCta";
 import { slugify } from "../utils";
 import axios from "axios";
 import { sanitize } from "dompurify";
+import FormOne from "../component/contact/FormOne";
 // import Reveal from 'react-reveal/Reveal';
 
 // const allBlogData = BlogData;
 
 const BlogDetails = () => {
+
+  const [isFixed, setIsFixed] = useState(false);
+
+useEffect(() => {
+  const handleScroll = () => {
+    const offset = window.scrollY;
+    // Change the value as per your requirement to determine when to fix the section
+    const triggerOffset = 200;
+
+    if (offset > triggerOffset) {
+      setIsFixed(true);
+    } else {
+      setIsFixed(false);
+    }
+  };
+
+  window.addEventListener('scroll', handleScroll);
+
+  return () => {
+    window.removeEventListener('scroll', handleScroll);
+  };
+}, []);
+
   // this is for using slug of the blog
 
   // const params = useParams();
   // const blogId = params.slug;
 
   // const getBlogData = allBlogData.filter(blog => blog.slug === blogId);
-  // const detailsBlog = getBlogData[0];
+  // const allBlogData = getBlogData[0];
 
   // this is for using slugify with title of the blog
 
-  const [allBlogData, setBlog] = useState([]);
-  console.log("complete blog data", allBlogData)
+  const [allBlogData, setBlog] = useState();
   const [pagefound, setPageFound] = useState("");
   const [loading, setLoading] = useState(false);
-  
+
   const params = useParams();
   const blogSlug = params.slug;
 
@@ -44,8 +67,7 @@ const BlogDetails = () => {
       const result = await axios.get(url);
       setLoading(true);
       const data = result.data;
-      console.log("blog details page", data)
-      if (data.length > 0) {
+      if (data) {
         setBlog(data);
       } else {
         setPageFound("Notfound");
@@ -56,16 +78,15 @@ const BlogDetails = () => {
   };
 
   useEffect(() => {
-    let API = "http://localhost:8000/admin/admin";
+    let API = `https://api.hirolainfotech.com/${blogSlug}`;
     fetchBlog(API);
-  }, []);
+  }, [blogSlug]);
 
-  const getBlogData = allBlogData.filter(
-    (data) => slugify(data.title) === blogSlug
-  );
-  console.log("getblogdata", getBlogData)
-  const detailsBlog = getBlogData[0];
-  console.log("detailsblog", detailsBlog)
+  // const getBlogData = allBlogData.filter(
+  //   (data) => slugify(data.title) === blogSlug
+  // );
+
+  // const detailsBlog = allBlogData;
 
   const [toggler, setToggler] = useState(false);
 
@@ -97,24 +118,24 @@ const BlogDetails = () => {
     prevArrow: <SlickPrevArrow />,
   };
 
-  
+  console.log(allBlogData?.large_thumb[0]?.url)
+
 
 
   return (
     <>
       <Helmet>
-        <title>{detailsBlog?.metaTitle}</title>
+        <title>{allBlogData?.metaTitle}</title>
         <meta
           name="description"
-          content={detailsBlog?.metaDescription}
+          content={allBlogData?.metaDescription}
           data-rh="true"
         />
       </Helmet>
 
-      <main className="main-wrapper">
+      {allBlogData ? <main className="main-wrapper">
         <HeaderOne />
-        {/* <Reveal effect="fadeInUp" duration={900}> */}
-        <BreadCrumbOne title={detailsBlog?.title} page="Blog" />
+        <BreadCrumbOne title={allBlogData?.title} page="Blog" />
         <div className="section-padding-equal">
           <div className="container">
             <div className="row row-40">
@@ -122,32 +143,19 @@ const BlogDetails = () => {
                 <div className="single-blog">
                   <div className="single-blog-content blog-grid">
                     <div className="post-thumbnail">
-                      {/* {
-                                                Array.isArray(detailsBlog.large_thumb) ? 
-                                                <Slider {...slideSettings} className="slick-arrow-nav">
-                                                    {detailsBlog.large_thumb.map((data, index) => (
-                                                        <div className="slide-item" key={index}>
-                                                            <img src={`${process.env.PUBLIC_URL}/${data}`} loading="lazy" alt="Blog" />
-                                                        </div>
-                                                    ))}
-                                                    
-                                                </Slider> 
-                                                : <img src={`${process.env.PUBLIC_URL}/${detailsBlog.large_thumb}`} loading="lazy" alt="Blog" />
-                                            } */}
+                      {Array.isArray(allBlogData?.large_thumb) ? (
+                        <Slider {...slideSettings} className="slick-arrow-nav">
+                          {allBlogData?.large_thumb?.map((data, index) => (
+                            <div className="slide-item" key={index}>
+                              <img src={data?.url} loading="lazy" alt="Blog" />
+                            </div>
+                          ))}
+                        </Slider>
+                      ) : (
+                        <img src={allBlogData?.large_thumb[0]?.url} loading="lazy" alt="Blog" />
+                      )}
 
-                                            {Array.isArray(detailsBlog?.large_thumb) ? (
-        <Slider {...slideSettings} className="slick-arrow-nav">
-            {detailsBlog?.large_thumb.map((data, index) => (
-                <div className="slide-item" key={index}>
-                    <img src={data.url} loading="lazy" alt="Blog" />
-                </div>
-            ))}
-        </Slider>
-    ) : (
-        <img src={detailsBlog?.large_thumb[0].url} loading="lazy" alt="Blog" />
-    )}
-
-                      {detailsBlog?.format === "video" ? (
+                      {allBlogData?.format === "video" ? (
                         <>
                           <div className="popup-video">
                             <button
@@ -179,57 +187,62 @@ const BlogDetails = () => {
                       </div>
                       <div className="info">
                         <h6 className="author-name">
-                          {detailsBlog?.author.author_name}
+                          {allBlogData?.author?.author_name}
                         </h6>
                         <ul className="blog-meta list-unstyled">
-                          {/* <li>{detailsBlog?.post_date}</li> */}
-                          <li>{detailsBlog?.read_time}</li>
+                          {/* <li>{allBlogData?.post_date}</li> */}
+                          <li>{allBlogData?.read_time}</li>
                         </ul>
                       </div>
                     </div>
                     <p className="mt-2 mb-2">
-                      {/* <p>{detailsBlog.blogSubDescription}</p> */}
+                      {/* <p>{allBlogData.blogSubDescription}</p> */}
                     </p>
-                    {/* <p>{detailsBlog.blogDescription}</p> */}
-                      <div
-                        dangerouslySetInnerHTML={{
-                          __html: sanitize(detailsBlog?.body),
-                        }}
-                      ></div>
-                   
+                    {/* <p>{allBlogData.blogDescription}</p> */}
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: sanitize(allBlogData?.body),
+                      }}
+                    ></div>
+
 
                     <div className="row">
-                        <div className="col-6">
-                          <div className="featured-img">
-                            <img
-                              src="https://res.cloudinary.com/dq6ok3jsu/image/upload/v1701951614/blog-8_iwnpyz.png"
-                              loading="lazy"
-                              alt="blog image"
-                            />
-                          </div>
+                      <div className="col-6">
+                        <div className="featured-img">
+                          <img
+                            src="https://res.cloudinary.com/dq6ok3jsu/image/upload/v1701951614/blog-8_iwnpyz.png"
+                            loading="lazy"
+                            alt="blog"
+                          />
                         </div>
-                        <div className="col-6">
-                          <div className="featured-img">
-                            <img
-                              src="https://res.cloudinary.com/dq6ok3jsu/image/upload/v1701951615/blog-9_djyuyq.png"
-                              loading="lazy"
-                              alt="blog image"
-                            />
-                          </div>
+                      </div>
+                      <div className="col-6">
+                        <div className="featured-img">
+                          <img
+                            src="https://res.cloudinary.com/dq6ok3jsu/image/upload/v1701951615/blog-9_djyuyq.png"
+                            loading="lazy"
+                            alt="blog"
+                          />
                         </div>
+                      </div>
                     </div>
                   </div>
                 </div>
-                <BlogAuthor data={detailsBlog} />
+                <BlogAuthor data={allBlogData} />
               </div>
               <div className="col-lg-4">
+                <div className="sticky-sidebar">
                 <BlogSidebar />
+                </div>
+                <div className={`sticky-form ${isFixed ? 'fixed-form' : ''}`}>
+        <FormOne/>
+      </div>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="section section-padding-equal pt-0 related-blog-area">
+        {/* <div className="section section-padding-equal pt-0 related-blog-area">
           <div className="container">
             <div className="section-heading heading-left">
               <h3 className="title">Related Post</h3>
@@ -238,11 +251,13 @@ const BlogDetails = () => {
               <BlogListOne colSize="col-xl-6" itemShow="2" />
             </div>
           </div>
-        </div>
+        </div> */}
         <FooterCta />
         <FooterOne parentClass="" />
         {/* </Reveal> */}
       </main>
+        : <p>Loading...</p>}
+
     </>
   );
 };
