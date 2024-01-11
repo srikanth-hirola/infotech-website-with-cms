@@ -3,8 +3,10 @@ const bodyParser = require('body-parser');
 const cloudinary = require("cloudinary");
 const cors = require('cors');
 const ConnectDatabase = require('./db_connection');
+const compression = require('compression')
 
 const app = express();
+app.use(compression())
 const PORT = process.env.PORT || 8000;
 
 const adminRoutes = require('./routes/adminServer');
@@ -13,6 +15,11 @@ const cookieParser = require('cookie-parser');
 
 const allowedOrigins = [
   'http://localhost:3000',
+  'http://localhost:3001',
+  'https://hirolaits.com',
+  'https://hirolainfotech.com',
+  'https://www.hirolaits.com',
+  'https://www.hirolainfotech.com',
 ];
 
 ConnectDatabase();
@@ -55,8 +62,8 @@ cloudinary.config({
 app.use('/', frontEndRoutes);
 app.use('/admin', adminRoutes);
 
-app.get('/api', (req, res) => {
-  res.send("Api");
+app.get('/res', (req, res) => {
+  console.log("first")
 });
 
 app.listen(PORT, () => {

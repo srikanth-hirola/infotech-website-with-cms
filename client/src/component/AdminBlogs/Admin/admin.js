@@ -32,7 +32,7 @@ const Admin = () => {
   };
 
   useEffect(() => {
-    let API = 'https://api.hirolainfotech.com/admin/admin';
+    let API = 'http://localhost:8000/admin/admin';
     fetchBlog(API);
   }, []);
 

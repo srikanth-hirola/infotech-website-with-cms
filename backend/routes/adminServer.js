@@ -57,8 +57,8 @@ let upload = multer({
   },
 });
 
-router.get('/admin', (req, res) => {
-  Blog.find()
+router.get('/admin', async (req, res) => {
+  Blog.find({}, { _id: 1, title: 1, createdAt: 1, post_date: 1, large_thumb: 1, excerpt: 1, read_time: 1, author: 1, category: 1, slug: 1, })
     .sort({ _id: -1 })
     .then((result) => {
       return res.send(result);
@@ -67,6 +67,36 @@ router.get('/admin', (req, res) => {
       console.log(err);
     });
 });
+
+
+router.get('/admin/categories', async (req, res) => {
+  Blog.find({}, { _id: 1, category: 1 })
+    .sort({ _id: -1 })
+    .then((result) => {
+      return res.send(result);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
+router.get('/admin/pagination', async (req, res) => {
+  const page = req.query.page || 1;
+  const ITEMS_PER_PAGE = req.query.limit || 10
+  try {
+    const result = await Blog.find({}, { _id: 1, title: 1, createdAt: 1, post_date: 1, large_thumb: 1, excerpt: 1, read_time: 1, author: 1, category: 1, slug: 1, })
+      .sort({ _id: -1 })
+      .skip((page - 1) * ITEMS_PER_PAGE)
+      .limit(ITEMS_PER_PAGE)
+      .exec();
+
+    res.send(result);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
 
 router.post('/register', async (req, res, next) => {
   try {

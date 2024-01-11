@@ -25,7 +25,7 @@ const BlogSidebar = () => {
     };
 
     useEffect(() => {
-        let API = "https://api.hirolainfotech.com/admin/admin";
+        let API = "http://localhost:8000/admin/admin";
         fetchBlog(API);
     }, []);
 
@@ -33,11 +33,10 @@ const BlogSidebar = () => {
         <div className="axil-sidebar">
 
             <div className="widget widget-categories">
-        <FormOne/>
                 <h4 className="widget-title">Categories</h4>
                 <WidgetCategory blogs={blogs} />
             </div>
-            <div className="widget widge-social-share">
+        <div className="widget widge-social-share">
                 <div className="blog-share">
                     <h6 className="title text-white">Follow :</h6>
                     <ul className="social-list list-unstyled">
@@ -53,13 +52,14 @@ const BlogSidebar = () => {
             <div className="widget widget-recent-post">
                 <h4 className="widget-title">Recent post</h4>
                 <WidgetPost blogs={blogs} />
-                <FormOne/>
             </div>
-            {/* <div className="widget widget-banner-ad" id="stickyBanner">
+            <div className="widget widget-banner-ad">
                 <Link to="#">
                     <img src={process.env.PUBLIC_URL + "/images/banner/widget-banner.png"} loading="lazy" alt="banner" />
                 </Link>
-            </div> */}
+        <FormOne/>
+            </div>
+           
         </div>
     )
 }

@@ -38,7 +38,6 @@ router.get('/:slug', (req, res) => {
         res.send(result);
       })
       .catch((e) => {
-
         console.log(e);
       });
   } catch (e) {
