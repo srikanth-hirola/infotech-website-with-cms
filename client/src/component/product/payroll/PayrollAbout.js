@@ -13,7 +13,7 @@ const PayrollAbout = () => {
                     <div className="row">
                     <div className="col-xl-7 col-lg-6">
                         <div className="case-study-featured-thumb text-start">
-                        <img src={process.env.PUBLIC_URL + "/images/blog/ab-img.png"} loading="lazy" alt="travel" />
+                        <img src="https://res.cloudinary.com/dq6ok3jsu/image/upload/v1701951150/ab-img_mjfiam.png" loading="lazy" alt="travel" />
                         </div>
                     </div>
                     <div className="col-xl-5 col-lg-6">

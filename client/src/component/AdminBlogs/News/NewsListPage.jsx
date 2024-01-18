@@ -47,12 +47,12 @@ const [currentPage, setCurrentPage] = useState(1);
           ),
           ...getColumnSearchProps('title', 'Title'),
         },
-        // {
-        //   title: 'Image',
-        //   dataIndex: 'Dimage',
-        //   key: 'Dimage',
-        //   render: (Dimage) => <img src={Dimage?.url} alt="Image" style={{ width: '50px', height: '50px' }} />,
-        // },
+        {
+          title: 'Image',
+          dataIndex: 'Dimage',
+          key: 'Dimage',
+          render: (Dimage) => <img src={Dimage?.url} alt="Image" style={{ width: '50%', height: '100px', objectFit:'contain' }} />,
+        },
         {
           title: 'Action',
           key: 'action',
