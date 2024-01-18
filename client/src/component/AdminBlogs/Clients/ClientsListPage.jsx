@@ -40,12 +40,12 @@ const [currentPage, setCurrentPage] = useState(1);
           title: 'Client Name',
           dataIndex: 'clientName',
           key: 'clientName',
+          ...getColumnSearchProps('clientName', 'Client Name'),
           render: (text, record) => (
             <Link to={`/admin/clients/edit/${record._id}`} style={{ display: 'block' }}>
               {text}
             </Link>
           ),
-          ...getColumnSearchProps('title', 'Title'),
         },
         // {
         //     title: "Address",
