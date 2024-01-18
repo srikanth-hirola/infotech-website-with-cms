@@ -46,6 +46,7 @@ import { Button, Modal } from 'antd';
 import axios from 'axios';
 import { useApiCalls } from '../../../Hooks/useApiCalls';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const DeleteButton = ({ id, setLoading, endpoint, message, redirectPath }) => {
   const { deleteData } = useApiCalls();
@@ -65,6 +66,7 @@ const DeleteButton = ({ id, setLoading, endpoint, message, redirectPath }) => {
       setLoading(true);
       await axios.delete(`http://localhost:8000/${endpoint}`);
       console.log('Deletion Success');
+      toast.success("Deleted Successfully");
       setLoading(false);
       // deleteData(endpoint, message); // Assuming this function updates the state after deletion
       // if (redirectPath) {
