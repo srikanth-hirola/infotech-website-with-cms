@@ -1,39 +1,103 @@
-import axios from 'axios';
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import Button from 'react-bootstrap/Button';
-import { useApiCalls } from '../../../Hooks/useApiCalls';
+// import axios from 'axios';
+// import React from 'react';
+// import { useNavigate } from 'react-router-dom';
+// import Button from 'react-bootstrap/Button';
+// import { useApiCalls } from '../../../Hooks/useApiCalls';
 
-const DeleteButton = ({ id, setLoading, endpoint, message }) => {
+// const DeleteButton = ({ id, setLoading, endpoint, message }) => {
+//   const { deleteData } = useApiCalls();
+//   const navigate = useNavigate();
+
+//   const remove = async (e) => {
+//     e.preventDefault();
+
+//     try {
+//       await axios
+//         .delete(`https://api.hirolainfotech.com/admin/blog/delete/${id}`)
+//         .then(() => {
+//           console.log('Deletion Success');
+//           window.location.reload(false);
+//           navigate('/admin');
+//         })
+//         .catch((e) => {
+//           console.log(e);
+//         });
+//     } catch (e) {
+//       console.log(e);
+//     }
+//   };
+
+//   return (
+//     <>
+//       <Button type="button" variant="outline-danger" onClick={(e) => deleteData(e, setLoading, endpoint, message)}>
+//         Delete
+//       </Button>
+//     </>
+//   );
+// };
+
+// export default DeleteButton;
+
+
+
+
+import React, { useState } from 'react';
+import { Button, Modal } from 'antd';
+import axios from 'axios';
+import { useApiCalls } from '../../../Hooks/useApiCalls';
+import { useNavigate } from 'react-router-dom';
+
+const DeleteButton = ({ id, setLoading, endpoint, message, redirectPath }) => {
   const { deleteData } = useApiCalls();
   const navigate = useNavigate();
+  const [isConfirmationVisible, setIsConfirmationVisible] = useState(false);
 
-  const remove = async (e) => {
-    e.preventDefault();
+  const showConfirmation = () => {
+    setIsConfirmationVisible(true);
+  };
 
+  const handleCancel = () => {
+    setIsConfirmationVisible(false);
+  };
+
+  const remove = async () => {
     try {
-      await axios
-        .delete(`https://api.hirolainfotech.com/admin/blog/delete/${id}`)
-        .then(() => {
-          console.log('Deletion Success');
-          window.location.reload(false);
-          navigate('/admin');
-        })
-        .catch((e) => {
-          console.log(e);
-        });
-    } catch (e) {
-      console.log(e);
+      setLoading(true);
+      await axios.delete(`http://localhost:8000/${endpoint}`);
+      console.log('Deletion Success');
+      setLoading(false);
+      // deleteData(endpoint, message); // Assuming this function updates the state after deletion
+      // if (redirectPath) {
+      //   navigate(redirectPath);
+      // }
+      window.location.reload()
+    } catch (error) {
+      console.error('Error deleting:', error);
+      setLoading(false);
+    } finally {
+      setIsConfirmationVisible(false);
     }
   };
 
   return (
     <>
-      <Button type="button" variant="outline-danger" onClick={(e) => deleteData(e, setLoading, endpoint, message)}>
+      <Button type="button" variant="outline-danger"  onClick={showConfirmation}>
         Delete
       </Button>
+
+      <Modal
+        title="Confirm Deletion"
+        open={isConfirmationVisible}
+        onOk={remove}
+        onCancel={handleCancel}
+        okText="Yes, Delete"
+        cancelText="Cancel"
+      >
+        <p>Are you sure you want to delete?</p>
+      </Modal>
     </>
   );
 };
 
 export default DeleteButton;
+
