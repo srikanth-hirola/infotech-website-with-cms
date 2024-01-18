@@ -1,117 +1,118 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import Header from '../Constants/header';
 import { useApiCalls } from '../../../Hooks/useApiCalls';
 import { formNavData } from './formNavData';
 import Error from '../Constants/error';
 import { Backdrop, CircularProgress } from '@mui/material';
 import Container from 'react-bootstrap/esm/Container';
-import DataTable from 'react-data-table-component';
+import { Table, Input } from 'antd';
 
 export const FormData = () => {
-    const [loading, setLoading] = useState(false);
-    const [formData, setFormData] = useState([]);
-    const [pagefound, setPageFound] = useState('');
-    const columns = [
-        {
-            name: 'ID',
-            selector: (row) => row._id,
-        },
-        {
-            name: 'Name',
-            selector: (row) => row.name,
-        },
-        {
-            name: 'Email',
-            selector: (row) => row.email,
-        },
-        {
-            name: 'Phone',
-            selector: (row) => row.phone,
-        },
-        {
-            name: 'Company',
-            selector: (row) => row.company,
-        },
-        {
-            name: 'Service',
-            selector: (row) => row.service,
-        }
-    ];
+  const [loading, setLoading] = useState(false);
+  const [formData, setFormData] = useState([]);
+  const [pagefound, setPageFound] = useState('');
 
+  const { fetchBunchData } = useApiCalls();
 
-    const ExpandRowsComponent = ({ data }) => {
-        return <pre>{JSON.stringify(data, null, 2)}</pre>
-    }
+  useEffect(() => {
+    let endpoint = 'admin/form';
+    fetchBunchData(endpoint, setLoading, setFormData, setPageFound);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-    const { fetchBunchData } = useApiCalls();
+  const [query, setQuery] = useState('');
 
-console.log("data",formData)
-    useEffect(() => {
-        let endpoint = 'admin/form'
-        fetchBunchData(endpoint, setLoading, setFormData, setPageFound);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+  const search = (data) => {
+    console.log(data.email);
+    return data.filter(
+      (item) =>
+        item.name.toLowerCase().includes(query) ||
+        item.email.toLowerCase().includes(query) ||
+        item.company.toLowerCase().includes(query) ||
+        item.service.toLowerCase().includes(query) ||
+        item.phone.includes(query)
+    );
+  };
 
-    const [query, setQuery] = useState('');
+  const columns = [
+    {
+      title: 'Date',
+      dataIndex: 'createdAt',
+      key: 'createdAt',
+      render: (createdAt) => {
+        const date = new Date(createdAt);
+        return `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
+      },
+    },
+    {
+      title: 'Name',
+      dataIndex: 'name',
+      key: 'name',
+    },
+    {
+      title: 'Email',
+      dataIndex: 'email',
+      key: 'email',
+    },
+    {
+      title: 'Phone',
+      dataIndex: 'phone',
+      key: 'phone',
+    },
+    {
+      title: 'Company',
+      dataIndex: 'company',
+      key: 'company',
+    },
+    {
+      title: 'Service',
+      dataIndex: 'service',
+      key: 'service',
+    },
+  ];
 
-    const search = (data) => {
-        console.log(data.email)
-        return data.filter(
-            (item) =>
-                item.name.toLowerCase().includes(query) ||
-                item.email.toLowerCase().includes(query) ||
-                item.company.toLowerCase().includes(query) ||
-                item.service.toLowerCase().includes(query) ||
-                item.phone.includes(query) 
-                
-        );
-    };
-
-    return (
-        <>
-            <Header navData={formNavData} />
-            {loading ? (
-                <Container>
-                    <div>
-                        <h1>formData</h1>
-                        <input
-                            type="text"
-                            placeholder="Search"
-                            onChange={(e) => setQuery(e.target.value)}
-                        />
-                        {pagefound === 'Notfound' ? (
-                            <Error />
-                        ) : (
-                            <div className="homeContent">
-                             
-                                        <React.Fragment>
-                                            <DataTable
-                                                columns={columns}
-                                                data={search(formData)}
-                                                dense
-                                                fixedHeader
-                                                pagination
-                                                fixedHeaderScrollHeight="500px"
-                                                highlightOnHover
-                                                striped
-                                                expandableRows
-                                                expandableRowsComponent={ExpandRowsComponent}
-                                            ></DataTable>
-                                        </React.Fragment>
-                            </div>
-                        )}
-                    </div>
-                </Container>
+  return (
+    <>
+      <Header navData={formNavData} />
+      {loading ? (
+        <Container>
+          <div>
+            <h1>formData</h1>
+            <Input
+              type="text"
+              placeholder="Search"
+              onChange={(e) => setQuery(e.target.value)}
+            />
+            {pagefound === 'Notfound' ? (
+              <Error />
             ) : (
-                <Backdrop
-                    sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-                    open
-                >
-                    <CircularProgress color="inherit" />
-                </Backdrop>
+              <div className="homeContent">
+                <React.Fragment>
+                  <Table
+                    columns={columns}
+                    dataSource={search(formData)}
+                    pagination={{ pageSize: 10 }}
+                    // loading={loading}
+                    // expandable={{
+                    //   expandedRowRender: (record) => (
+                    //     <pre>{JSON.stringify(record, null, 2)}</pre>
+                    //   ),
+                    //   rowExpandable: () => true,
+                    // }}
+                  />
+                </React.Fragment>
+              </div>
             )}
-
-
-        </>
-    )
-}
+          </div>
+        </Container>
+      ) : (
+        <Backdrop
+          sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+          open
+        >
+          <CircularProgress color="inherit" />
+        </Backdrop>
+      )}
+    </>
+  );
+};
