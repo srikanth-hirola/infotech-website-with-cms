@@ -20,9 +20,9 @@ const ContactLocation = () => {
     }, []);
     return (
         <>
-            {contact.map((data, index) => (
+            {/* {contact.map((data, index) => (
                 <div className="col-lg-3 col-sm-6" key={index}>
-                    <div className="office-location">
+                <div className="office-location">
                         <div className="thumbnail">
                             <Link to={process.env.PUBLIC_URL + `/${slugify(data.cityName)}`}><img src={process.env.PUBLIC_URL + data.Dimage.url} loading="lazy" alt="Office" /></Link>
                         </div>
@@ -32,7 +32,21 @@ const ContactLocation = () => {
                         </div>
                     </div>
                 </div>
-            ))}
+            ))} */}
+            {loading && <p>Loading...</p>}
+        {contact.reverse().map((data, index) => (
+            <div className="col-lg-3 col-sm-6" key={index}>
+                <div className="office-location">
+                    <div className="thumbnail">
+                        <Link to={process.env.PUBLIC_URL + `/${slugify(data.cityName)}`}><img src={process.env.PUBLIC_URL + data.Dimage.url} loading="lazy" alt="Office" /></Link>
+                    </div>
+                    <div className="content">
+                        <Link to={process.env.PUBLIC_URL + `/${slugify(data.cityName)}`}><h4 className="title">{data.cityName}</h4></Link>
+                        <p>{data.Address}</p>
+                    </div>
+                </div>
+            </div>
+        ))}
             {/* {allData.slice(0,4).map((data, index) => (
                 <div className="col-lg-3 col-sm-6" key={index}>
                     <div className="office-location">

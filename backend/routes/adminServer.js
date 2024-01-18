@@ -943,7 +943,7 @@ router.delete('/news/:id', async (req, res) => {
 
 router.get('/cities', (req, res) => {
   Cities.find()
-    .sort({ _id: -1 })
+    // .sort({ _id: -1 })
     .then((result) => {
       return res.send(result);
     })
