@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom';
 import { Navbar, Nav } from 'react-bootstrap';
+import LogoutButton from './buttons/logoutButton';
 
 export const SideBar = () => {
 
@@ -9,6 +10,12 @@ export const SideBar = () => {
 
   const handleLinkClick = (link) => {
     setSelectedLink(link);
+  };
+
+  const handleLogout = () => {
+    // Additional logout-related logic, if needed
+    // For example, redirecting to the login page, etc.
+    setSelectedLink(''); // Clear selected link
   };
 
     return (
@@ -82,6 +89,7 @@ export const SideBar = () => {
             FormData
           </Nav.Link>
         </Nav.Item>
+      <LogoutButton onLogout={handleLogout} />
       </Nav>
     </Navbar>
     )
