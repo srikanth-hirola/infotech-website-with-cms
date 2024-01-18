@@ -106,11 +106,17 @@ const AdminHome = lazy(() => import( './pages/AdminHome'));
 // blogsroutes starts here
 
 const NewsAdd  = lazy(() => import( './pages/News-pages/NewsAdd'))
+const CitiesAdd  = lazy(() => import( './pages/cities/CitiesAdd'))
+const ClientsAdd  = lazy(() => import( './pages/Clients/ClientsAdd'))
 const TeamAdd  = lazy(() => import( './pages/Teams/TeamAdd'))
 const TeamEdit = lazy(() => import( './pages/Teams/TeamEdit'))
 const TeamsHomePage = lazy(() => import( './pages/Teams/TeamsHomePage'))
 const NewsEdit = lazy(() => import( './pages/News-pages/NewsEdit'))
+const CityEdit = lazy(() => import( './pages/cities/CityEdit'))
+const ClientEdit = lazy(() => import( './pages/Clients/ClientEdit'))
 const NewsHomePage = lazy(() => import( './pages/News-pages/NewsHomePage'))
+const CitiesHomePage = lazy(() => import( './pages/cities/CitiesHomePage'))
+const ClientsHomePage = lazy(() => import( './pages/Clients/ClientsHomePage'))
 const FormPage = lazy(() => import( './pages/Form/FormPage'))
 const AddBlog = lazy(() => import( './pages/AddBlog'))
 const EditBlog = lazy(() => import( './pages/EditBlog'))
@@ -195,6 +201,28 @@ const App = () => {
               }
             />
             <Route
+              path="/admin/cities"
+              exact
+              element={
+                
+                  <ProtectedAdminRoute>
+                    <CitiesHomePage />
+                  </ProtectedAdminRoute>
+                
+              }
+            />
+            <Route
+              path="/admin/clients"
+              exact
+              element={
+                
+                  <ProtectedAdminRoute>
+                    <ClientsHomePage />
+                  </ProtectedAdminRoute>
+                
+              }
+            />
+            <Route
               path="/admin/form"
               exact
               element={
@@ -250,6 +278,28 @@ const App = () => {
               }
             />
             <Route
+              path="/admin/cities/edit/:id"
+              exact
+              element={
+                
+                  <ProtectedAdminRoute>
+                    <CityEdit />
+                  </ProtectedAdminRoute>
+                
+              }
+            />
+            <Route
+              path="/admin/clients/edit/:id"
+              exact
+              element={
+                
+                  <ProtectedAdminRoute>
+                    <ClientEdit />
+                  </ProtectedAdminRoute>
+                
+              }
+            />
+            <Route
               path="/admin/blog/edit/:id"
               exact
               element={
@@ -300,6 +350,28 @@ const App = () => {
                 
                   <ProtectedAdminRoute>
                     <NewsAdd />
+                  </ProtectedAdminRoute>
+                
+              }
+            />
+            <Route
+              path="/admin/cities/add"
+              exact
+              element={
+                
+                  <ProtectedAdminRoute>
+                    <CitiesAdd />
+                  </ProtectedAdminRoute>
+                
+              }
+            />
+            <Route
+              path="/admin/clients/add"
+              exact
+              element={
+                
+                  <ProtectedAdminRoute>
+                    <ClientsAdd />
                   </ProtectedAdminRoute>
                 
               }

@@ -61,6 +61,18 @@ export const SideBar = () => {
           </Nav.Link>
         </Nav.Item>
         <Nav.Item>
+          <Nav.Link as={Link} to="/admin/cities" className={`sidebar-link ${location.pathname === '/admin/cities' ? 'selected' : ''}`}
+            onClick={() => handleLinkClick('/admin/cities')} >
+            Cities
+          </Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link as={Link} to="/admin/clients" className={`sidebar-link ${location.pathname === '/admin/clients' ? 'selected' : ''}`}
+            onClick={() => handleLinkClick('/admin/clients')} >
+            Clients
+          </Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
           <Nav.Link 
              as={Link} 
              to="/admin/form" 

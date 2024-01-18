@@ -16,6 +16,8 @@ const Portfolio = require('../Models/Portfolio');
 const TeamCategory = require('../Models/TeamCategory');
 const Team = require('../Models/Team');
 const News = require('../Models/News');
+const Cities = require('../Models/Cities');
+const Clients = require('../Models/Clients');
 const Form = require('../Models/Forms');
 const TwoSideMails = require('../utils/TwoSideMail');
 const AdminSideMailBody = require('../utils/EmailBody/toAdmin');
@@ -932,6 +934,290 @@ router.delete('/news/:id', async (req, res) => {
     }
   }
 })
+
+
+
+
+
+
+
+router.get('/cities', (req, res) => {
+  Cities.find()
+    .sort({ _id: -1 })
+    .then((result) => {
+      return res.send(result);
+    })
+    .catch((err) => {
+      res.status(500).json({ error: "Internal Server Error" });
+    });
+});
+
+router.post('/cities/compose', async (req, res) => {
+  try {
+    const { data } = req.body;
+    let allImages = data?.Dimage;
+
+    if (!allImages) {
+      res.status(404).json({ message: "No City Image is uploaded" });
+      return;
+    }
+
+    const uploadPromises = async (allImages) => {
+      const myCloud = await cloudinary.v2.uploader.upload(allImages, {
+        folder: 'cities',
+      });
+
+      return {
+        public_id: myCloud.public_id,
+        url: myCloud.secure_url,
+      };
+    };
+
+    const uploadedImages = await uploadPromises(allImages);
+
+    await new Cities({ ...data, Dimage: uploadedImages }).save()
+
+    res.status(200).json({ success: true, message: 'Added City Successfull' })
+
+  } catch (error) {
+    if (error.name === "ValidationError") {
+      const validationErrors = Object.values(error.errors).map((err) => err.message);
+      res.status(400).json({ error: "Validation Error", message: "All Fields are required!" });
+    } else {
+      res.status(500).json({ error: "Internal Server Error" });
+    }
+  }
+
+});
+
+router.get('/cities/:id', (req, res) => {
+  const { id } = req.params;
+  Cities.findById(id)
+    .then((result) => {
+      return res.status(200).json({ success: true, data: result });
+    })
+    .catch((err) => {
+      res.status(500).json({ error: "Internal Server Error" });
+    });
+});
+
+router.put('/cities/:id', async (req, res) => {
+  try {
+    const { data } = req.body;
+    const { id } = req.params;
+    let allImages = data?.Dimage;
+
+    let prevData = await Cities.findById(id);
+
+
+    if (!allImages) {
+      res.status(404).json({ message: "No Image is uploaded" });
+      return;
+    }
+
+    const uploadPromises = async (allImages) => {
+      if (typeof allImages === 'string') {
+        const myCloud = await cloudinary.v2.uploader.upload(allImages, {
+          folder: 'cities',
+        });
+
+        await DeleteCloudinaryImage(prevData?.Dimage?.public_id)
+
+        return {
+          public_id: myCloud.public_id,
+          url: myCloud.secure_url,
+        };
+      } else {
+        return allImages
+      }
+
+    };
+
+
+    const uploadedImages = await uploadPromises(allImages);
+
+    await Cities.findOneAndUpdate(
+      { _id: id },
+      {
+        $set: {
+          cityName: data?.cityName,
+          Dimage: uploadedImages,
+          Address: data?.Address,
+        },
+      }
+    )
+
+    res.status(200).json({ success: true, message: 'Updated City Successfull' })
+
+  } catch (error) {
+    console.log(error)
+    if (error.name === "ValidationError") {
+      const validationErrors = Object.values(error.errors).map((err) => err.message);
+      res.status(400).json({ error: "Validation Error", message: "All Fields are required!" });
+    } else {
+      res.status(500).json({ error: "Internal Server Error" });
+    }
+  }
+});
+
+router.delete('/cities/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    let prevData = await Cities.findById(id);
+    await DeleteCloudinaryImage(prevData?.Dimage?.public_id)
+    await Cities.findByIdAndDelete(id);
+    res.status(200).json({ success: true, message: 'Updated City Successfull' })
+
+  } catch (error) {
+    if (error.name === "ValidationError") {
+      res.status(400).json({ error: "Validation Error", message: "All Fields are required!" });
+    } else {
+      res.status(500).json({ error: "Internal Server Error" });
+    }
+  }
+})
+
+
+
+
+
+router.get('/clients', (req, res) => {
+  Clients.find()
+    .sort({ _id: -1 })
+    .then((result) => {
+      return res.send(result);
+    })
+    .catch((err) => {
+      res.status(500).json({ error: "Internal Server Error" });
+    });
+});
+
+router.post('/clients/compose', async (req, res) => {
+  try {
+    const { data } = req.body;
+    let allImages = data?.Dimage;
+
+    if (!allImages) {
+      res.status(404).json({ message: "No Client Image is uploaded" });
+      return;
+    }
+
+    const uploadPromises = async (allImages) => {
+      const myCloud = await cloudinary.v2.uploader.upload(allImages, {
+        folder: 'clients',
+      });
+
+      return {
+        public_id: myCloud.public_id,
+        url: myCloud.secure_url,
+      };
+    };
+
+    const uploadedImages = await uploadPromises(allImages);
+
+    await new Clients({ ...data, Dimage: uploadedImages }).save()
+
+    res.status(200).json({ success: true, message: 'Added Client Successfull' })
+
+  } catch (error) {
+    if (error.name === "ValidationError") {
+      const validationErrors = Object.values(error.errors).map((err) => err.message);
+      res.status(400).json({ error: "Validation Error", message: "All Fields are required!" });
+    } else {
+      res.status(500).json({ error: "Internal Server Error" });
+    }
+  }
+
+});
+
+router.get('/clients/:id', (req, res) => {
+  const { id } = req.params;
+  Clients.findById(id)
+    .then((result) => {
+      return res.status(200).json({ success: true, data: result });
+    })
+    .catch((err) => {
+      res.status(500).json({ error: "Internal Server Error" });
+    });
+});
+
+router.put('/clients/:id', async (req, res) => {
+  try {
+    const { data } = req.body;
+    const { id } = req.params;
+    let allImages = data?.Dimage;
+
+    let prevData = await Clients.findById(id);
+
+
+    if (!allImages) {
+      res.status(404).json({ message: "No Image is uploaded" });
+      return;
+    }
+
+    const uploadPromises = async (allImages) => {
+      if (typeof allImages === 'string') {
+        const myCloud = await cloudinary.v2.uploader.upload(allImages, {
+          folder: 'clients',
+        });
+
+        await DeleteCloudinaryImage(prevData?.Dimage?.public_id)
+
+        return {
+          public_id: myCloud.public_id,
+          url: myCloud.secure_url,
+        };
+      } else {
+        return allImages
+      }
+
+    };
+
+
+    const uploadedImages = await uploadPromises(allImages);
+
+    await Clients.findOneAndUpdate(
+      { _id: id },
+      {
+        $set: {
+          clientName: data?.clientName,
+          Dimage: uploadedImages,
+        },
+      }
+    )
+
+    res.status(200).json({ success: true, message: 'Updated Client Successfull' })
+
+  } catch (error) {
+    console.log(error)
+    if (error.name === "ValidationError") {
+      const validationErrors = Object.values(error.errors).map((err) => err.message);
+      res.status(400).json({ error: "Validation Error", message: "All Fields are required!" });
+    } else {
+      res.status(500).json({ error: "Internal Server Error" });
+    }
+  }
+});
+
+router.delete('/clients/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    let prevData = await Clients.findById(id);
+    await DeleteCloudinaryImage(prevData?.Dimage?.public_id)
+    await Clients.findByIdAndDelete(id);
+    res.status(200).json({ success: true, message: 'Updated Client Successfull' })
+
+  } catch (error) {
+    if (error.name === "ValidationError") {
+      res.status(400).json({ error: "Validation Error", message: "All Fields are required!" });
+    } else {
+      res.status(500).json({ error: "Internal Server Error" });
+    }
+  }
+})
+
+
+
 
 
 
