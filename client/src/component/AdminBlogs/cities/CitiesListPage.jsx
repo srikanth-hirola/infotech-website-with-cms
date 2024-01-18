@@ -14,6 +14,7 @@ export const CitiesListPage = () => {
     const [loading, setLoading] = useState(false);
   const [cities, setCities] = useState([]);
   const [filteredCities, setFilteredCities] = useState([]);
+  console.log("cites", filteredCities)
   const [pagefound, setPageFound] = useState('');
   const [searchText, setSearchText] = useState('');
   const searchInputRef = useRef(null);
