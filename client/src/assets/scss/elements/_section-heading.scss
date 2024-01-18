@@ -140,6 +140,8 @@
 
 .heading-left {
     text-align: left;
+    position: relative;
+    z-index: 999;
     @media #{$md-layout}{
         text-align: center;
     }

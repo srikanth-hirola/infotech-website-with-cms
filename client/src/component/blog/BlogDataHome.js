@@ -28,14 +28,14 @@ const BlogDataHome = ({ colSize, itemShow }) => {
   };
 
   useEffect(() => {
-    let API = "http://localhost:8000/admin/admin";
+    let API = "https://api.hirolainfotech.com/admin/admin";
     fetchBlog(API);
   }, []);
 
 
   return (
     <>
-      {blog.slice(-8).map((data) => (
+      {blog.slice(-4).map((data) => (
         <div className={`${colSize}`} key={data.id}>
           <div className={`blog-thumb-list blog-list ${(data.id % 2 === 0)}`}>
             <div className="post-thumbnail">

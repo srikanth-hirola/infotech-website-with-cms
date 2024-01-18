@@ -159,6 +159,9 @@
             border-bottom: var(--border-lighter);
             .post-thumbnail {
                 width: 100px;
+                @media #{$lg-layout} {
+                    width: 250px;
+                }
                 a {
                     border-radius: 16px;
                     overflow: hidden;
@@ -171,6 +174,10 @@
             .post-content {
                 flex: 1;
                 margin-left: 20px;
+                @media #{$lg-layout}{
+                    width: 250px;
+    margin: 10px 0px 10px 0px;
+                }
                 .title {
                     margin-bottom: 10px;
                     background: linear-gradient(90deg, rgb(255, 116, 37) 8%, rgb(0, 0, 0) 83%);

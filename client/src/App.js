@@ -8,6 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import './assets/scss/app.scss';
 
 import { ToastContainer } from 'react-toastify';
+// import LatestServices from './pages/services-latest/LatestServices';
 // Home Pages Import
 const DigitalAgency = lazy(() => import('./pages/DigitalAgency'));
 const CreativeAgency = lazy(() => import('./pages/CreativeAgency'));
@@ -23,6 +24,7 @@ const BlogDetails = lazy(() => import('./pages/BlogDetails'));
 
 // Service
 const ServiceOne = lazy(() => import('./pages/ServiceOne'));
+const LatestServices = lazy(() => import('./pages/services-latest/LatestServices'));
 const ServiceTwo = lazy(() => import('./pages/ServiceTwo'));
 const ServiceDetails = lazy(() => import('./pages/ServiceDetails'));
 
@@ -369,6 +371,10 @@ const App = () => {
             <Route
               path={process.env.PUBLIC_URL + '/services/'}
               element={<ServiceOne />}
+            />
+            <Route
+              path={process.env.PUBLIC_URL + '/services/:slug'}
+              element={<LatestServices />}
             />
             <Route
               path={process.env.PUBLIC_URL + '/services-two/'}

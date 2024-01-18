@@ -31,7 +31,7 @@ const WidgetPost = ({ blogs }) => {
 
   useEffect(() => {
     if (blogs.length > 0) {
-      setBlog(blogs.slice(0, 20));
+      setBlog(blogs.slice(0, 5));
 
     } else {
       setPageFound("Notfound");

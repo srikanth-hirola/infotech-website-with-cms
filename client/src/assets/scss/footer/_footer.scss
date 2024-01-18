@@ -3,6 +3,9 @@
 -------------------------*/
 .footer-area {
     padding-top: 10px;
+    position: relative;
+    z-index: 9999;
+background: #fff;
 }
 .footer-top {
     padding-bottom: 70px;

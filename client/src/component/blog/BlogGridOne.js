@@ -13,7 +13,7 @@ const BlogGridOne = ({ blogsLength }) => {
     const [pagefound, setPageFound] = useState("");
 
     const [toggler, setToggler] = useState(false);
-    let API = "http://localhost:8000/admin/admin/pagination";
+    let API = "https://api.hirolainfotech.com/admin/admin/pagination";
 
 
     const fetchBlog = async (url, pageNum) => {
@@ -96,7 +96,7 @@ const BlogGridOne = ({ blogsLength }) => {
     // };
 
     // useEffect(() => {
-    //     let API = "http://localhost:8000/admin/admin";
+    //     let API = "https://api.hirolainfotech.com/admin/admin";
     //     fetchBlog(API);
     // }, []);
 

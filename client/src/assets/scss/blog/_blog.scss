@@ -711,18 +711,83 @@ img.aathr {
 // }
 
 .fixed-form {
-    // position: fixed;
-    display: none;
-    top: 0;
-    width: 25%; /* Adjust the width as needed */
-    /* Additional styles for the fixed position */
-    /* Example styles */
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: -75px;
+    width: 27.2%;
+    background: #fff;
+    /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
     padding: 20px;
+    z-index: 0;
+    right: 100px;
+    @media #{$sm-layout} {       
+            position: relative !important;
+            top: 0;
+            width: 100%;
+            background: #fff;
+            /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
+            padding: 20px;
+            z-index: -1;
+            right: 0;
+    }
+    @media #{$md-layout} {
+            position: relative !important;
+            top: 0;
+            width: 100%;
+            background: #fff;
+            /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
+            padding: 20px;
+            z-index: -1;
+            right: 0;
+        }
+    @media #{$lg-layout} {
+            // position: relative !important;
+            top: 0;
+            width: 34%;
+            background: #fff;
+            /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
+            padding: 20px;
+            z-index: -1;
+            right: 0;
+        }
   }
   
   /* Additional styles to prevent content jumping when fixing */
-  .sticky-sidebar.fixed-form + .sticky-form {
-    margin-top: 220px; /* Adjust as needed */
+  .fixed-form {
+    margin-top:0; /* Adjust as needed */
   }
+  .sticky-sidebar{
+    position: relative;
+    z-index: 9999;
+    background: #fff;
+    padding: 20px;
+  }
+// .jodit-react-container{
+//     // height: 800px;
+//     overflow: scroll;
+//     background: transparent;
+// }
+
+  .jodit-toolbar__box:not(:empty):not(:empty) {
+    background-color: #f9f9f9;
+    position: sticky !important;
+    top: 144px !important;
+}
+.jodit-container:not(.jodit_inline) {
+    min-height: 100px;
+    position: relative  !important;
+}
+.single-blog {
+    padding: 60px 0px;
+}
+.breadcrum-area.bread-new {
+    background: linear-gradient(105deg, #ECF2F6 0%, rgb(255 255 255) 70.31%);
+    position: relative;
+    z-index: 3;
+}
+.section-padding-equal.sec-new {
+    padding: 0px 0 60px;
+    background: #fff;
+}
+.row.row-40 .col-lg-4{
+    padding: 0px 32px;
+}

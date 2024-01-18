@@ -231,7 +231,15 @@
 
 
 // home newsletter section starte here
+#news-letter{
+    position: relative;
+    background: #fff;
+    z-index: 9999;
+}
 #home-news-letter{    padding: 0px 0px;
+    position: relative;
+    z-index: 999;
+    background: #fff;
     @media #{$md-layout}{
         padding: 0;
     }
@@ -242,6 +250,8 @@
     align-items: center;
     background: #f8f9fa;
     border-radius: 211px;
+    position: relative;
+    z-index: 9999;
     @media #{$sm-layout}{
         padding: 20px;
     border-radius: 0;

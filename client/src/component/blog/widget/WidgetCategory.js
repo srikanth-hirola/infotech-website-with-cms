@@ -26,7 +26,7 @@ const WidgetCategory = ({ blogs }) => {
   };
 
   useEffect(() => {
-    let API = "http://localhost:8000/admin/admin/categories";
+    let API = "https://api.hirolainfotech.com/admin/admin/categories";
     fetchBlog(API);
   }, []);
 

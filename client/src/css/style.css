@@ -328,6 +328,10 @@ form {
 .admin-side-bar {
   width: 17%;
 }
+.admin-main-parent .jodit-wysiwyg{
+
+  cursor: pointer;
+}
 .admin-main-parent {
   width: 83%;
   padding-inline: 20px;

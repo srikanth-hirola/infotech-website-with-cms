@@ -25,7 +25,7 @@ const BlogSidebar = () => {
     };
 
     useEffect(() => {
-        let API = "http://localhost:8000/admin/admin";
+        let API = "https://api.hirolainfotech.com/admin/admin";
         fetchBlog(API);
     }, []);
 
@@ -53,12 +53,12 @@ const BlogSidebar = () => {
                 <h4 className="widget-title">Recent post</h4>
                 <WidgetPost blogs={blogs} />
             </div>
-            <div className="widget widget-banner-ad">
+            {/* <div className="widget widget-banner-ad">
                 <Link to="#">
                     <img src={process.env.PUBLIC_URL + "/images/banner/widget-banner.png"} loading="lazy" alt="banner" />
                 </Link>
-        <FormOne/>
-            </div>
+        
+            </div> */}
            
         </div>
     )
