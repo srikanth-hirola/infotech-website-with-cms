@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "main": "index.js",
-  "homepage": "https://hirolainfotech.com",
+  "homepage": "https://hirolaits.com",
   "dependencies": {
     "@ant-design/icons": "^5.2.6",
     "@emailjs/browser": "^3.4.0",
