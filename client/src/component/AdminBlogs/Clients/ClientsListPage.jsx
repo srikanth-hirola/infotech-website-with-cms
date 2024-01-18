@@ -70,6 +70,7 @@ const [currentPage, setCurrentPage] = useState(1);
                 setLoading={setLoading}
                 endpoint={`admin/clients/${record._id}`}
                 message="Deleted Client Successfully"
+                redirectPath={"/admin/clients"}
               />
             </Space>
           ),
