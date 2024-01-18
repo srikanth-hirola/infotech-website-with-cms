@@ -48,6 +48,12 @@ export const PortfolioList = () => {
         </Link>
       ),
     },
+      {
+          title: 'Image',
+          dataIndex: 'thumb',
+          key: 'thumb',
+          render: (thumb) => <img src={thumb?.url} alt="Image" style={{ width: '150px', height: '150px', objectFit:'contain' }} />,
+        },
     {
       title: "Category",
       dataIndex: "category",

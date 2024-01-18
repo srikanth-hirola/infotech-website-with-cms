@@ -45,7 +45,7 @@ export const FormData = () => {
 
     const { fetchBunchData } = useApiCalls();
 
-
+console.log("data",formData)
     useEffect(() => {
         let endpoint = 'admin/form'
         fetchBunchData(endpoint, setLoading, setFormData, setPageFound);
