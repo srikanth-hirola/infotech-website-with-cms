@@ -64,7 +64,7 @@ const DeleteButton = ({ id, setLoading, endpoint, message, redirectPath }) => {
   const remove = async () => {
     try {
       setLoading(true);
-      await axios.delete(`http://localhost:8000/${endpoint}`);
+      await axios.delete(`https://api.hirolainfotech.com/${endpoint}`);
       console.log('Deletion Success');
       toast.success("Deleted Successfully");
       setLoading(false);
