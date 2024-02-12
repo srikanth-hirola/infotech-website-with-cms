@@ -22,7 +22,7 @@ const HomeCaseStudy = () => {
 				<p class="tech-content"> With their expertise in social media marketing, Hirola Infotech Solutions has developed and implemented tailored strategies to promote HSBC Bank's home loan products to a targeted audience across various social media platforms </p>
 				{/* <Link to="/" target="_blank" class="btn common-btn" id="discover1" onclick="btnFlip(this.id)" rel="noopener"> */}
 					
-					<p class="p2"><PopUpForm/></p>
+					<p class="p2"><PopUpForm title={"Get Started"}/></p>
 				{/* </Link> */}
 				{/* <div class="left-dots-bg"></div> */}
 			</div>
@@ -35,7 +35,7 @@ const HomeCaseStudy = () => {
 				<p class="tech-content"> In the realm of website development, Hirola InfoTech Solutions excels in harnessing the latest technologies and trends. They ensure that Concept City's website is not only visually captivating but also highly responsive and user-friendly, catering to the diverse needs of their audience. </p>
 				{/* <Link to="/" target="_blank" class="btn common-btn" id="discover2" onclick="btnFlip(this.id)" rel="noopener"> */}
 					
-					<p class="p2"><PopUpForm/></p>
+					<p class="p2"><PopUpForm title={"Get Started"}/></p>
 				{/* </Link> */}
 				{/* <div class="right-dots-bg"></div> */}
 			</div>

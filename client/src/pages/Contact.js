@@ -36,19 +36,20 @@ const Contact = () => {
                     <div className="row">
                         <div className="col-xl-5 col-lg-6">
                             <div className="contact-form-box shadow-box mb--30">
-                                <h3 className="title">Get a Free Quote</h3>
+                            <h3 className="title">Get a Free Quote</h3>
                                 <FormTwo />
                             </div>
                         </div>
                         <div className="col-xl-5 col-lg-6 offset-xl-1">
                             <div className="contact-info mb--30 mb_md--30 mt_md--0 mt--0">
                                 <h4 className="title">Phone</h4>
-                                <p>Our customer care is open from Mon-Sat, 9:00 am to 8:00 pm</p>
+                                <p>Our customer care is Avaialable for  24/7</p>
                                 <h4 className="phone-number"><a href="tel:+91 9916113646">+91 9916113646</a></h4>
+                                <h4 className="phone-number"><a href="tel:+91 7483071385">+91 7483071385</a></h4>
                             </div>
                             <div className="contact-info mb--30">
                                 <h4 className="title">Email</h4>
-                                <p>Our support team will get back to you in 12-24 hours during standard business hours.</p>
+                                <p>Our support team will get back to you Within  3-4 hours during standard business hours.</p>
                                 <h4 className="phone-number"><a href="mailto:hello@hirolainfotech.com">hello@hirolainfotech.com</a></h4>
                             </div>
                             <div className="contact-info mb--30">

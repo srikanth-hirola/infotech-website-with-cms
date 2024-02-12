@@ -36,7 +36,7 @@ const Aviaton = () => {
             <div className="col-xl-6">
                 <div className="main-slider-three__content">
                     <p className="main-slider-three__sub-title">Inflight Advertising</p>
-                    <h2 className="main-slider-three__title">Airline Advertising  &amp; <br/> Agency in Bangalore</h2>
+                    <h2 className="main-slider-three__title">Airline Advertising   <br/> Agency in Bangalore</h2>
                     <div className="main-slider-three__btn-box">
                         <a href="contact.html" className="axil-btn btn-fill-primary btn-medium mx-0">Enquire Now</a>
                         <Link to='/contact-us' className='axil-btn btn-fill-primary btn-medium mx-3'>Contact Us</Link>

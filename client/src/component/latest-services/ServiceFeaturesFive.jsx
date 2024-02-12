@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { servicesOneData } from "../../data/ServiceCms/ServicesCmsData";
-const ServiceFeatureTwo = () => {
+const ServiceFeatureFive = () => {
   return (
     <>
       <div className="service-new-features-two">
@@ -19,7 +19,7 @@ const ServiceFeatureTwo = () => {
               <div className="row">
                 {servicesOneData.serviceData.map((data) => (
                   <div className="col-md-4">
-                    <div className="service-new-features-two-card">
+                    <div className="service-new-features-two-card service-five">
                       <h3>{data.number}</h3>
                       <h5>{data.title}</h5>
                       {/* <div className="read-more-wrap">
@@ -45,20 +45,15 @@ const ServiceFeatureTwo = () => {
                           <input
                             type="checkbox"
                             className="read-more-state"
-                            id={`post-${data.number}`} // This For for identifying 
+                           
                           />
 
                           <p className="read-more-wrap">
-                            {data.description.slice(0, 150)}.{" "}
-                            <span className="read-more-target">
-                              {data.description.slice(150)}
-                            </span>
+                            {data.description}
+                        
                           </p>
 
-                          <label
-                            htmlFor={`post-${data.number}`}
-                            className="read-more-trigger"
-                          ></label>
+                         
                         </div>
                       </div>
                     </div>
@@ -73,4 +68,4 @@ const ServiceFeatureTwo = () => {
   );
 };
 
-export default ServiceFeatureTwo;
+export default ServiceFeatureFive;

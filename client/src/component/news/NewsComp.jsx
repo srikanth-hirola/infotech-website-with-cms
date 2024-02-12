@@ -96,8 +96,8 @@ const News = ({ colSize, itemShow, testimonialData, layoutStyle }) => {
            <div className="news-card news-card-home">
             <div class="">
             <Link to={process.env.PUBLIC_URL + "/news"}>
-                                        <img className="light-version-logo light-version-logo1 log-1" src={data.Dimage.url} loading="lazy" alt="logo" />
-        </Link>
+                 <img className="light-version-logo light-version-logo1 log-1" src={data.Dimage.url} loading="lazy" alt="logo" />
+            </Link>
             <div class="card_content">
 <h3 className="title">{data.title}</h3>
 <span class="card_title">{data.description.slice(0,130)}...</span>

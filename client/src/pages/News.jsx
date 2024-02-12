@@ -60,14 +60,14 @@ const News = ({ itemShow }) => {
                   <a href={data.link} target="_blank">
                     <div className="news-card mb--30">
                       <div class="">
-                        <Link to="">
+                        <a  href={data.link} target="_blank">
                           <img
                             className="light-version-logo light-version-logo1"
                             src={data.Dimage}
                             loading="lazy"
                             alt="logo"
                           />
-                        </Link>
+                        </a>
                         <div class="card_content">
                           <h3 className="title">{data.title}</h3>
                         </div>
@@ -87,7 +87,7 @@ const News = ({ itemShow }) => {
                   <a href={data.link} target="_blank">
                     <div className="news-card mb--30">
                       <div class="">
-                        <Link to="">
+                        <a href={data.link} target="_blank">
                           <img
                             className="light-version-logo light-version-logo1"
                             src={data.Dimage.url}
@@ -95,7 +95,7 @@ const News = ({ itemShow }) => {
                             alt="logo"
                           />
                         
-                        </Link>
+                        </a>
                         <div class="card_content">
                           <h3 className="title sb-tle">{data.title}</h3>
                           {/* <span class="card_title">{data.description.slice(0,150)}...</span> */}

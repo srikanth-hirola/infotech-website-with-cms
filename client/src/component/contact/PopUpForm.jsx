@@ -13,7 +13,8 @@ const Result = () => {
   );
 };
 
-const PopUpForm = () => {
+const PopUpForm = ({title}) => {
+  console.log("title",title)
   const [show, setShow] = useState(false);
   const [lgShow, setLgShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -80,7 +81,7 @@ const PopUpForm = () => {
 
 
 <Button onClick={handleShow}>
-        Get Started
+        {title}
       </Button>
 
       <Modal

@@ -129,3 +129,13 @@
         }
     }
 }
+
+.slick-prev:before, .slick-next:before {
+    font-family: 'slick';
+    line-height: 1;
+    font-size: 0px;
+    opacity: .75;
+    color: white;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}

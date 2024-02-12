@@ -8,6 +8,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import './assets/scss/app.scss';
 
 import { ToastContainer } from 'react-toastify';
+import DropdownExample from './elements/Select';
+import Sitemap from './elements/section-title/Sitemap';
 // import LatestServices from './pages/services-latest/LatestServices';
 // Home Pages Import
 const DigitalAgency = lazy(() => import('./pages/DigitalAgency'));
@@ -70,7 +72,6 @@ const HrAndPayroll  = lazy(() => import( './pages/productPages/HrAndPayroll'));
 const JewellerySoftware  = lazy(() => import( './pages/productPages/JewellerySoftware'));
 const InventorySoftware  = lazy(() => import( './pages/productPages/InventorySoftware'));
 const SchoolSoftware  = lazy(() => import( './pages/productPages/SchoolSoftware'));
-const Clients  = lazy(() => import( './pages/Clients'));
 const SeoCompanies  = lazy(() => import( './pages/companies/SeoCompanies'));
 const SeoCompaniesDetails  = lazy(() => import( './pages/companies/SeoCompaniesDetails'));
 const Delhi  = lazy(() => import( './pages/cities/Delhi'));
@@ -88,6 +89,7 @@ const SeoCompanyInKolkata  = lazy(() => import( './pages/companies/SeoCompanyInK
 const SeoCompanyInMumbai  = lazy(() => import( './pages/companies/SeoCompanyInMumbai'));
 const SeoCompanyInPune  = lazy(() => import( './pages/companies/SeoCompanyInPune'));
 const News  = lazy(() => import( './pages/News'));
+const Clients  = lazy(() => import( './pages/Clients'));
 const Whatsapp  = lazy(() => import( './common/Whatsapp'));
 const SalesIQ  = lazy(() => import( './common/ZohoSales'));
 
@@ -155,6 +157,8 @@ const App = () => {
 
 
             <Route path="*" element={<Error />} />
+            <Route path="/select" element={<DropdownExample />} />
+            <Route path="/sitemap" element={<Sitemap />} />
             <Route path='/admin/login' exact element={<Login />} />
             <Route
               path="/admin"
@@ -423,6 +427,10 @@ const App = () => {
               element={<News />}
             />
             <Route
+              path={process.env.PUBLIC_URL + '/clients/'}
+              element={<Clients />}
+            />
+            <Route
               path={process.env.PUBLIC_URL + '/category/:slug'}
               element={<BlogCategory />}
             />
@@ -447,6 +455,7 @@ const App = () => {
             <Route
               path={process.env.PUBLIC_URL + '/services/:slug'}
               element={<LatestServices />}
+              
             />
             <Route
               path={process.env.PUBLIC_URL + '/services-two/'}
@@ -461,11 +470,7 @@ const App = () => {
               element={<ServiceDetails />}
             />
 
-            {/* <Route
-             <Route
-            path={process.env.PUBLIC_URL + '/our-products/:slug/'}
-            element={<ProductDetails />}
-          /> */}
+           
             <Route
               path={process.env.PUBLIC_URL + 'products/hr-and-payroll-management-software'}
               element={<HrAndPayroll />}
@@ -523,18 +528,12 @@ const App = () => {
               path={process.env.PUBLIC_URL + '/about-us/'}
               element={<AboutUs />}
             />
-            {/* <Route
-            path={process.env.PUBLIC_URL + '/tab/'}
-            element={<AboutTab />}
-          /> */}
+         
             <Route
               path={process.env.PUBLIC_URL + '/cities-we-are/'}
               element={<CitiesWeAre />}
             />
-            {/* {    <Route
-            path={process.env.PUBLIC_URL + '/:slug/'}
-            element={<CitiesWeAreDetails />}
-          />} */}
+        
             <Route
               path={process.env.PUBLIC_URL + '/our-office/'}
               element={<OurOffice />}
@@ -557,14 +556,7 @@ const App = () => {
               path={process.env.PUBLIC_URL + '/case-details/:slug/'}
               element={<CaseDetails />}
             />
-            {/* <Route
-            path={process.env.PUBLIC_URL + '/seo-companies/'}
-            element={<SeoCompanies />}
-          /> */}
-            {/* <Route
-            path={process.env.PUBLIC_URL + '/:slug/'}
-            element={<SeoCompaniesDetails />}
-          /> */}
+           
             <Route
               path={process.env.PUBLIC_URL + '/testimonials/'}
               element={<Testimonials />}
@@ -601,10 +593,7 @@ const App = () => {
               path={process.env.PUBLIC_URL + '/terms-and-conditions'}
               element={<TermsOfUse />}
             />
-            {/* <Route
-            path={process.env.PUBLIC_URL + '/terms-use'}
-            element={<TermsOfUse />}
-          /> */}
+          
             <Route path={process.env.PUBLIC_URL + '/*'} element={<ErrorPage />} />
 
             {/* Admin */}
@@ -679,20 +668,13 @@ const App = () => {
             />
 
 
-            {/* landing pages routes   */}
-            <Route
-              path={process.env.PUBLIC_URL + '/e-commerce-product/'}
-              element={<EcommerecLandingPage />}
-            />
-            {/* landing pages routes   */}
             <Route
               path='*'
-              element={<PageNotFound />}
+              element={<Error />}
             />
           </Routes>
         </ScrollToTop>
         <Whatsapp />
-        {/* <SalesIQ/> */}
       </Router>
           </Suspense>
     </HelmetProvider>

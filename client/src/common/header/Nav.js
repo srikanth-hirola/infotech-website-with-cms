@@ -29,6 +29,7 @@ const Nav = () => {
                 <li><Link to={process.env.PUBLIC_URL + "/case-studies"}>Case Studies</Link></li>
                         <li><Link to={process.env.PUBLIC_URL + "/testimonials"}>Testimonial</Link></li>
                         <li><Link to={process.env.PUBLIC_URL + "/news"}>News</Link></li>
+                        <li><Link to={process.env.PUBLIC_URL + "/clients"}>Our Clients</Link></li>
                         
                         <li><Link to={process.env.PUBLIC_URL + "/cities-we-are"}>Cities We Are</Link></li>
                         <li><Link to={process.env.PUBLIC_URL + "/team"}>Our Team</Link></li>

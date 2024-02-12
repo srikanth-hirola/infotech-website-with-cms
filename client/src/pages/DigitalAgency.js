@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { Modal } from 'antd';
 import FooterOne from '../common/footer/FooterOne';
 import HeaderOne from '../common/header/HeaderOne';
 import AboutOne from '../component/about/AboutOne';
@@ -29,7 +30,19 @@ import PopUpFormTwo from '../component/contact/PopUpFormTwo';
 // const allData = HomeData;
 
 const DigitalAgency = () => {
+    const [visibleModal, setVisibleModal] = useState(false);
 
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setVisibleModal(true);
+        }, 3000);
+
+        return () => clearTimeout(timer);
+    }, []);
+
+    const handleModalClose = () => {
+        setVisibleModal(false);
+    };
 
 
     return (
@@ -47,7 +60,18 @@ const DigitalAgency = () => {
            
             <ScrollToTop/>
             <OurPatners/>
-            
+            <Modal
+                    title="🚨 Caution: Job Scam Alert! 🚨"
+                    visible={visibleModal}
+                    onOk={handleModalClose}
+                    onCancel={handleModalClose}
+                    className='cautious-title'
+                >
+              
+                    <p>It has come to our attention that fraudulent job offers, falsely claiming to be from Hirola Infotech Solutions, are in circulation. Please be wary of unsolicited emails or messages asking for personal information or payments.</p>
+
+                    {/* <strong id='scam-tt' >Hirola Infotech Solutions</strong> */}
+                </Modal>
             <div className="section section-padding-2 bg-color-light">
                 <div className="container">
                     <SectionTitle 

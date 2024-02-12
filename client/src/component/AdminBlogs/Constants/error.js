@@ -1,9 +1,18 @@
 import React from 'react';
 import Container from 'react-bootstrap/Container';
+import { Helmet } from 'react-helmet-async';
 
 const Error = () => {
   return (
     <>
+      <Helmet>
+        <title>Page Not Found</title>
+        <meta
+          name="description"
+          content="Page Not Found"
+          data-rh="true"
+        />
+      </Helmet>
       <section className="page_404">
         <Container>
           <div className="container">

@@ -6,6 +6,7 @@ const ConnectDatabase = require('./db_connection');
 const compression = require('compression')
 
 const app = express();
+const { SitemapStream, streamToPromise } = require('sitemap');
 app.use(compression())
 const PORT = process.env.PORT || 8000;
 
@@ -69,3 +70,35 @@ app.get('/res', (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server started in port ${PORT}`);
 });
+
+app.get('/sitemap.xml', async (req, res) => {
+  try {
+    const urls = await generateUrls(); // You need to implement the function to fetch your URLs dynamically
+    const sitemap = await generateSitemap(urls);
+
+    res.header('Content-Type', 'application/xml');
+    res.send(sitemap);
+  } catch (error) {
+    console.error(error);
+    res.status(500).end();
+  }
+});
+
+async function generateUrls() {
+  // Implement logic to fetch and return URLs dynamically
+  // Example: Fetch URLs from a database or API
+  const response = await axios.get('http://localhost:8000/urls');
+  return response.data.urls;
+}
+
+async function generateSitemap(urls) {
+  const stream = new SitemapStream({ hostname: 'http://localhost:8000/' });
+
+  urls.forEach((url) => {
+    stream.write({ url, changefreq: 'daily', priority: 0.7 });
+  });
+
+  stream.end();
+
+  return streamToPromise(stream).then((data) => data.toString());
+}

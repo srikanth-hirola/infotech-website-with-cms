@@ -74,7 +74,7 @@ const BlogFormTwo = () => {
   return (
    <>
      
-    <form ref={form} className="axil-contact-form from-blog-2">
+    <form ref={form} className="axil-contact-form service-form-one">
     {/* <div className="blog-form-enquiry">
         <h4>Enquire Now</h4>
     </div> */}

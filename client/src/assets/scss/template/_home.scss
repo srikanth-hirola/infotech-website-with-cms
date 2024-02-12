@@ -234,11 +234,11 @@
 #news-letter{
     position: relative;
     background: #fff;
-    z-index: 9999;
+    z-index: 9;
 }
 #home-news-letter{    padding: 0px 0px;
     position: relative;
-    z-index: 999;
+    z-index: 9;
     background: #fff;
     @media #{$md-layout}{
         padding: 0;
@@ -251,7 +251,7 @@
     background: #f8f9fa;
     border-radius: 211px;
     position: relative;
-    z-index: 9999;
+    z-index: 999;
     @media #{$sm-layout}{
         padding: 20px;
     border-radius: 0;

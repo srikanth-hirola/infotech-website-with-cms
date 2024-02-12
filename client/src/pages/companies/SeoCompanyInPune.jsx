@@ -81,7 +81,7 @@ const SeoCompanyInPune = () => {
 
         {/* about us section */}
         {/* why work with us */}
-        <div className="section section-padding bg-color-light pb--80 pb_lg--40 pb_md--20">
+        <div className="section section-padding section-padding-ser bg-color-light pb--80 pb_lg--40 pb_md--20">
           <div className="container">
             <SectionTitle
               subtitle="Our Values"
@@ -129,7 +129,7 @@ const SeoCompanyInPune = () => {
 
         {/* about us */}
 
-        <div className="section section-padding pb--70">
+        <div className="section section-padding section-padding-ser pb--70">
           <div className="container">
             <h4 className="title text-center">{allServiceData.aboutUs.title}</h4>
             {
@@ -142,7 +142,7 @@ const SeoCompanyInPune = () => {
 
         {/* about us */}
    {/* our process */}
-   <div className="section section-padding pb--70">
+   <div className="section section-padding section-padding-ser pb--70">
           <SectionTitle
             subtitle="Process"
             title="Our logo design process"
@@ -215,7 +215,7 @@ const SeoCompanyInPune = () => {
 {/* informative secrion */}
 
 
-<div className="section section-padding pb--70 ">
+<div className="section section-padding section-padding-ser pb--70 ">
            
            <div className="container">
               <h3 className='text-center' >{allServiceData.dataOne.title}</h3>
@@ -246,7 +246,7 @@ const SeoCompanyInPune = () => {
        </div>
 
        
-<div className="section section-padding pb--70 ">
+<div className="section section-padding section-padding-ser pb--70 ">
            
            <div className="container">
               <h3 className='text-center' >{allServiceData.dataTwo.title}</h3>
@@ -277,7 +277,7 @@ const SeoCompanyInPune = () => {
        </div>
 {/* informative secrion */}
   {/* why work with us */}
-  <div className="section section-padding bg-color-light pb--80 pb_lg--40 pb_md--20">
+  <div className="section section-padding section-padding-ser bg-color-light pb--80 pb_lg--40 pb_md--20">
           <div className="container">
             <SectionTitle
               subtitle="Our Values"
@@ -323,7 +323,7 @@ const SeoCompanyInPune = () => {
 
         {/* services more info ends here */}
 
-        <div className="section section-padding pb--70 ">
+        <div className="section section-padding section-padding-ser pb--70 ">
            
            <div className="container">
               <h3 className='text-center' >{allServiceData.dataThree.title}</h3>
@@ -355,7 +355,7 @@ const SeoCompanyInPune = () => {
 
 
 
-       <div className="section section-padding pb--70 ">
+       <div className="section section-padding section-padding-ser pb--70 ">
            
            <div className="container">
               <h3 className='text-center' >{allServiceData.dataFour.title}</h3>
@@ -386,7 +386,7 @@ const SeoCompanyInPune = () => {
        </div>
         {/* faq ection goes here */}
 
-        <div className="section section-padding-equal faq-area">
+        <div className="section section-padding section-padding-ser-equal faq-area">
           <div className="container">
             <div className="row">
               <div className="col-lg-12 col-xl-12">

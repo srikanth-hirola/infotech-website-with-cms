@@ -1,4 +1,5 @@
 import React from 'react'
+import HeaderOne from '../../common/header/HeaderOne'
 import BannerNew from '../../component/latest-services/BannerNew'
 import ServiceFeatureTwo from '../../component/latest-services/ServiceFeatureTwo'
 import CounterNewService from '../../component/latest-services/CounterNewService'
@@ -10,9 +11,10 @@ import ServiceFeatureFour from '../../component/latest-services/ServiceFeatureFo
 import ServiceFeatureOne from '../../component/latest-services/ServiceFeatureOne'
 import ServiceFeatureThree from '../../component/latest-services/ServiceFeatureThree'
 import ServiceScroller from '../../component/latest-services/ServiceScroller'
-import HeaderOne from '../../common/header/HeaderOne'
-import Footer from '../../component/AdminBlogs/Constants/footer'
 import FooterOne from '../../common/footer/FooterOne'
+import ElevateBrand from '../../component/latest-services/ElevateBrand'
+import ClientScroll from '../../elements/ClientScroll'
+import ServiceFeaturesFive from '../../component/latest-services/ServiceFeaturesFive'
 
 const LatestServices = () => {
   return (
@@ -26,6 +28,9 @@ const LatestServices = () => {
         <ServiceFeatureFour/>
         <ProcessNew/>
         <ServiceScroller/>
+        <ElevateBrand/>
+        <ServiceFeaturesFive/>
+        <ClientScroll/>
         <CounterNewService/>
         <CtaNewTwo/>
         <CtaNewOne/>
